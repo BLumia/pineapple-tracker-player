@@ -20,6 +20,7 @@ QDebug& operator<<(QDebug& out, const std::string& str)
 
 Player::Player(QObject *parent)
     : QObject{parent}
+    , m_isPlaying(false)
 {
     portaudio::AutoSystem pa_initializer;
     pa_initializer.initialize();
@@ -62,17 +63,24 @@ bool Player::load(const QUrl &filename)
 
 void Player::play()
 {
+    if (!m_module) return;
+    m_isPlaying = true;
+}
+
+void Player::pause()
+{
+    m_isPlaying = false;
 }
 
 int Player::streamCallback(const void *inputBuffer, void *outputBuffer, unsigned long numFrames,
                            const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags)
 {
     float* buffer = (float*)outputBuffer;
-    if (m_module) {
+    if (m_module && m_isPlaying) {
         std::size_t count = m_module->read_interleaved_stereo(SAMPLE_RATE, numFrames, buffer);
         updateCachedState();
     } else {
-        std::fill(buffer, buffer + numFrames, 0);
+        std::fill(buffer, buffer + numFrames * 2, 0);
     }
 
     return 0;
@@ -123,9 +131,47 @@ int32_t Player::durationSec() const
     return m_module ? m_module->get_duration_seconds() : -1;
 }
 
+int32_t Player::totalChannels() const
+{
+    return m_module ? m_module->get_num_channels() : -1;
+}
+
+int32_t Player::totalSubsongs() const
+{
+    return m_module ? m_module->get_num_subsongs() : -1;
+}
+
+QStringList Player::instrumentNames() const
+{
+    QStringList result;
+    if (!m_module) return result;
+
+    std::vector<std::string> && names = m_module->get_instrument_names();
+    for (const std::string & name : names) {
+        result << QString::fromStdString(name);
+    }
+    return result;
+}
+
+int32_t Player::totalInstruments() const
+{
+    return m_module ? m_module->get_num_instruments() : -1;
+}
+
+int32_t Player::totalSamples() const
+{
+    return m_module ? m_module->get_num_samples() : -1;
+}
+
 QString Player::title() const
 {
     return m_module ? QString::fromStdString(m_module->get_metadata("title")) : QString();
+}
+
+// most of the case it's empty...
+QString Player::artist() const
+{
+    return m_module ? QString::fromStdString(m_module->get_metadata("artist")) : QString();
 }
 
 QString Player::message() const
@@ -137,6 +183,12 @@ void Player::seek(int32_t order, int32_t row)
 {
     if (!m_module) return;
     m_module->set_position_order_row(order, row);
+}
+
+void Player::setGlobalVolume(double volume)
+{
+    if (!m_interactive) return;
+    m_interactive->set_global_volume(volume);
 }
 
 void Player::updateCachedState()

@@ -41,8 +41,9 @@ public:
     Q_PROPERTY(int currentPattern READ currentPattern NOTIFY currentPatternChanged)
     Q_PROPERTY(int currentRow READ currentRow NOTIFY currentRowChanged)
 
-    bool load(const QUrl &filename);
-    void play();
+    Q_INVOKABLE bool load(const QUrl &filename);
+    Q_INVOKABLE void play();
+    Q_INVOKABLE void pause();
 
     int streamCallback(const void *inputBuffer, void *outputBuffer, unsigned long numFrames,
                        const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags);
@@ -55,11 +56,18 @@ public:
     std::int32_t patternTotalRows(std::int32_t pattern) const;
     std::int32_t positionSec() const;
     std::int32_t durationSec() const;
+    std::int32_t totalChannels() const;
+    std::int32_t totalSubsongs() const;
+    QStringList instrumentNames() const;
+    std::int32_t totalInstruments() const;
+    std::int32_t totalSamples() const;
 
-    QString title() const;
-    QString message() const;
+    Q_INVOKABLE QString title() const;
+    Q_INVOKABLE QString artist() const;
+    Q_INVOKABLE QString message() const;
 
-    void seek(std::int32_t order, std::int32_t row = 0);
+    Q_INVOKABLE void seek(std::int32_t order, std::int32_t row = 0);
+    Q_INVOKABLE void setGlobalVolume(double volume);
 
 signals:
     void currentOrderChanged();
@@ -76,5 +84,6 @@ private:
     openmpt::ext::interactive * m_interactive = nullptr;
     CachedPlaybackState m_cachedState;
     PlaybackOptions m_options;
+    bool m_isPlaying;
 };
 
