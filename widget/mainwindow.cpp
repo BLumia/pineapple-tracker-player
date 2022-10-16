@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     , m_player(new Player(this))
 {
     ui->setupUi(this);
-    const QFont fixedFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);
+    const QFont && fixedFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);
     ui->plainTextEdit->setFont(fixedFont);
 
     connect(m_player, &Player::fileLoaded, this, [this](){

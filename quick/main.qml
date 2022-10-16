@@ -91,6 +91,7 @@ ApplicationWindow {
                 TextArea {
                     id: messageArea
                     readOnly: true
+                    textFormat: TextEdit.RichText
                 }
             }
         }
@@ -103,7 +104,7 @@ ApplicationWindow {
             titleLabel.text = player.title()
             let artist = player.artist()
             artistTrackerLabel.text = artist === "" ? player.tracker() : artist + " (" + player.tracker() + ")"
-            messageArea.text = player.message()
+            messageArea.text = `<pre>${player.message()}</pre>`
         }
         onCurrentRowChanged: {
             let order = player.currentOrder.toString().padStart(3, " ")
