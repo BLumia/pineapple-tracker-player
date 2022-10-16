@@ -39,6 +39,8 @@ public:
     ~Player();
 
     Q_PROPERTY(int currentOrder READ currentOrder NOTIFY currentOrderChanged)
+    Q_PROPERTY(int totalOrders READ totalOrders NOTIFY totalOrdersChanged)
+    Q_PROPERTY(int positionSec READ positionSec)
     Q_PROPERTY(int currentPattern READ currentPattern NOTIFY currentPatternChanged)
     Q_PROPERTY(int currentRow READ currentRow NOTIFY currentRowChanged)
 
@@ -54,7 +56,7 @@ public:
     std::int32_t currentPattern() const;
     std::int32_t totalPatterns() const;
     std::int32_t currentRow() const;
-    std::int32_t patternTotalRows(std::int32_t pattern) const;
+    Q_INVOKABLE std::int32_t patternTotalRows(std::int32_t pattern) const;
     std::int32_t positionSec() const;
     std::int32_t durationSec() const;
     std::int32_t totalChannels() const;
@@ -76,6 +78,7 @@ public:
 
 signals:
     void currentOrderChanged();
+    void totalOrdersChanged();
     void currentPatternChanged();
     void currentRowChanged();
     void fileLoaded();

@@ -59,6 +59,7 @@ bool Player::load(const QUrl &filename)
     m_module->set_render_param(openmpt::module::RENDER_MASTERGAIN_MILLIBEL, m_options.gain);
 
     emit fileLoaded();
+    emit totalOrdersChanged();
 
     return true;
 }
