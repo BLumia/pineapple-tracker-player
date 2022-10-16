@@ -15,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
     , m_player(new Player(this))
 {
     ui->setupUi(this);
+    const QFont fixedFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);
+    ui->plainTextEdit->setFont(fixedFont);
 
     connect(m_player, &Player::fileLoaded, this, [this](){
         ui->horizontalSlider->setMaximum(m_player->totalOrders() - 1);
@@ -26,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
     connect(m_player, &Player::currentOrderChanged, this, [this](){
+        QSignalBlocker sb(ui->horizontalSlider);
         ui->horizontalSlider->setValue(m_player->currentOrder());
     });
 
@@ -37,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
                              ));
     });
 
-    connect(ui->horizontalSlider, &QSlider::sliderMoved, this, [this](int value){
+    connect(ui->horizontalSlider, &QSlider::valueChanged, this, [this](int value){
         m_player->seek(ui->horizontalSlider->value());
         QToolTip::showText(QCursor::pos(), QString::number(value), nullptr);
     });
