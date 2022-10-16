@@ -28,6 +28,7 @@ struct CachedPlaybackState
 struct PlaybackOptions
 {
     std::int32_t repeatCount = -1;
+    std::int32_t gain = 0; // 100 * dB
 };
 
 class Player : public QObject
@@ -57,6 +58,7 @@ public:
     std::int32_t positionSec() const;
     std::int32_t durationSec() const;
     std::int32_t totalChannels() const;
+    std::int32_t currentSubsong() const;
     std::int32_t totalSubsongs() const;
     QStringList instrumentNames() const;
     std::int32_t totalInstruments() const;
@@ -64,10 +66,13 @@ public:
 
     Q_INVOKABLE QString title() const;
     Q_INVOKABLE QString artist() const;
+    Q_INVOKABLE QString tracker() const;
     Q_INVOKABLE QString message() const;
 
     Q_INVOKABLE void seek(std::int32_t order, std::int32_t row = 0);
+    Q_INVOKABLE void setSubsong(std::int32_t subsong);
     Q_INVOKABLE void setGlobalVolume(double volume);
+    Q_INVOKABLE void setGain(std::int32_t dBx100 = 0);
 
 signals:
     void currentOrderChanged();

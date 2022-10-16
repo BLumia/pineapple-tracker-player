@@ -54,7 +54,9 @@ bool Player::load(const QUrl &filename)
     }
     m_interactive = static_cast<openmpt::ext::interactive*>(m_module->get_interface(openmpt::ext::interactive_id));
 
+    // apply options
     m_module->set_repeat_count(m_options.repeatCount);
+    m_module->set_render_param(openmpt::module::RENDER_MASTERGAIN_MILLIBEL, m_options.gain);
 
     emit fileLoaded();
 
@@ -136,6 +138,11 @@ int32_t Player::totalChannels() const
     return m_module ? m_module->get_num_channels() : -1;
 }
 
+int32_t Player::currentSubsong() const
+{
+    return m_module ? m_module->get_selected_subsong() : -1;
+}
+
 int32_t Player::totalSubsongs() const
 {
     return m_module ? m_module->get_num_subsongs() : -1;
@@ -174,6 +181,11 @@ QString Player::artist() const
     return m_module ? QString::fromStdString(m_module->get_metadata("artist")) : QString();
 }
 
+QString Player::tracker() const
+{
+    return m_module ? QString::fromStdString(m_module->get_metadata("tracker")) : QString();
+}
+
 QString Player::message() const
 {
     return m_module ? QString::fromStdString(m_module->get_metadata("message")) : QString();
@@ -183,12 +195,31 @@ void Player::seek(int32_t order, int32_t row)
 {
     if (!m_module) return;
     m_module->set_position_order_row(order, row);
+    emit currentPatternChanged();
+    emit currentRowChanged();
+}
+
+void Player::setSubsong(int32_t subsong)
+{
+    if (!m_module) return;
+    try {
+        m_module->select_subsong(subsong);
+    } catch (const openmpt::exception & e) {
+        qDebug() << "openmpt::exception:" << e.what() << Qt::endl;
+    }
 }
 
 void Player::setGlobalVolume(double volume)
 {
     if (!m_interactive) return;
     m_interactive->set_global_volume(volume);
+}
+
+void Player::setGain(std::int32_t dBx100)
+{
+    m_options.gain = dBx100;
+    if (!m_module) return;
+    m_module->set_render_param(openmpt::module::RENDER_MASTERGAIN_MILLIBEL, m_options.gain);
 }
 
 void Player::updateCachedState()

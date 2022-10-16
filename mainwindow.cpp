@@ -3,8 +3,10 @@
 
 #include "player.h"
 
+#include <QFileDialog>
 #include <QMimeData>
 #include <QMouseEvent>
+#include <QToolTip>
 #include <QTime>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -18,8 +20,9 @@ MainWindow::MainWindow(QWidget *parent)
         ui->horizontalSlider->setMaximum(m_player->totalOrders() - 1);
         ui->horizontalSlider->setValue(m_player->currentOrder());
         ui->label->setText(m_player->title());
-        ui->label_4->setText(m_player->artist());
-        ui->label_3->setText(m_player->message());
+        const QString & artist = m_player->artist();
+        ui->label_4->setText(artist.isEmpty() ? m_player->tracker() : (m_player->artist() + " (" + m_player->tracker() + ")") );
+        ui->plainTextEdit->setPlainText(m_player->message());
     });
 
     connect(m_player, &Player::currentOrderChanged, this, [this](){
@@ -34,12 +37,24 @@ MainWindow::MainWindow(QWidget *parent)
                              ));
     });
 
-    connect(ui->horizontalSlider, &QSlider::sliderMoved, this, [this](){
+    connect(ui->horizontalSlider, &QSlider::sliderMoved, this, [this](int value){
         m_player->seek(ui->horizontalSlider->value());
+        QToolTip::showText(QCursor::pos(), QString::number(value), nullptr);
     });
 
-    connect(ui->pushButton, &QPushButton::clicked, this, [this](){
-        qDebug() << "crashed" << 114514191981 / 0;
+    connect(ui->horizontalSlider_2, &QSlider::sliderMoved, this, [this](int value){
+        m_player->setGain(ui->horizontalSlider_2->value());
+        QToolTip::showText(QCursor::pos(), QString("%1 dB").arg(value / 100.f), nullptr);
+    });
+
+    connect(ui->actionNew_All, &QAction::triggered, this, [this](){
+        const QUrl & url = QFileDialog::getOpenFileUrl(
+                    this, "Select module file", {},
+                    "Module Files (*.xm *.it *.mod *.s3m *.mptm)");
+        if (url.isValid()) {
+            m_player->load(url);
+            m_player->play();
+        }
     });
 
     connect(ui->pushButton_2, &QPushButton::clicked, this, [this](){
