@@ -41,7 +41,7 @@ Player::Player(QObject *parent)
 
 Player::~Player()
 {
-
+    m_stream->stop();
 }
 
 bool Player::load(const QUrl &filename)
