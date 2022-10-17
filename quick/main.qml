@@ -84,14 +84,31 @@ ApplicationWindow {
             Label {
                 id: playbackStatusLabel
                 text: "Playback Status"
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        stackLayout.currentIndex = stackLayout.currentIndex === 0 ? 1 : 0
+                    }
+                }
             }
-            ScrollView {
+            StackLayout {
+                id: stackLayout
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                TextArea {
-                    id: messageArea
-                    readOnly: true
-                    textFormat: TextEdit.RichText
+                ScrollView {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    TextArea {
+                        id: messageArea
+                        readOnly: true
+                        textFormat: TextEdit.RichText
+                    }
+                }
+                TrackerView {
+                    id: trackerContainer
+                    channelCount: player.qml_channelCount
+                    rowCount: player.qml_rowCount
+                    currentRow: player.currentRow
                 }
             }
         }
@@ -100,12 +117,21 @@ ApplicationWindow {
     // Non-widgets:
     TrackerPlayer {
         id: player
+
+        property int qml_channelCount
+        property int qml_rowCount
+
         onFileLoaded: {
             titleLabel.text = player.title()
             let artist = player.artist()
             artistTrackerLabel.text = artist === "" ? player.tracker() : artist + " (" + player.tracker() + ")"
             messageArea.text = `<pre>${player.message()}</pre>`
+            qml_channelCount = player.totalChannels()
         }
+        onCurrentPatternChanged: {
+            qml_rowCount = player.patternTotalRows(player.currentPattern)
+        }
+
         onCurrentRowChanged: {
             let order = player.currentOrder.toString().padStart(3, " ")
             let orders = player.totalOrders.toString().padStart(3, " ")

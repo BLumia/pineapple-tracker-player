@@ -25,6 +25,7 @@ URI player
 VERSION 1.0
 QML_FILES
     main.qml
+    TrackerView.qml
 )
 
 target_link_libraries(pineapple-tracker-player-quick PRIVATE player-shared Qt::Quick)

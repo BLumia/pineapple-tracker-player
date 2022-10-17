@@ -1,6 +1,7 @@
 #include "player.h"
 
 #include <QUrl>
+#include <QFile>
 #include <QDebug>
 
 #include <fstream>
@@ -45,9 +46,15 @@ Player::~Player()
 
 bool Player::load(const QUrl &filename)
 {
-    std::ifstream file(filename.toLocalFile().toStdString(), std::ios::binary);
+    QFile file(filename.toLocalFile());
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "Cannot open file:" << filename;
+        return false;
+    }
+    QByteArray data(file.readAll());
     try {
-        m_module = new openmpt::module_ext(file);
+        // not using ifstream here since it might cause filename encoding issue
+        m_module = new openmpt::module_ext(data.data(), data.size());
     } catch (const openmpt::exception & e) {
         qDebug() << "openmpt::exception:" << e.what() << Qt::endl;
         return false;
@@ -59,6 +66,7 @@ bool Player::load(const QUrl &filename)
     m_module->set_render_param(openmpt::module::RENDER_MASTERGAIN_MILLIBEL, m_options.gain);
 
     emit fileLoaded();
+    emit currentPatternChanged();
     emit totalOrdersChanged();
 
     return true;
@@ -198,6 +206,12 @@ void Player::seek(int32_t order, int32_t row)
     m_module->set_position_order_row(order, row);
     emit currentPatternChanged();
     emit currentRowChanged();
+}
+
+void Player::setChannelMuteStatus(int32_t channel, bool mute)
+{
+    if (!m_interactive) return;
+    m_interactive->set_channel_mute_status(channel, mute);
 }
 
 void Player::setSubsong(int32_t subsong)
