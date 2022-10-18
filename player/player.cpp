@@ -200,6 +200,24 @@ QString Player::message() const
     return m_module ? QString::fromStdString(m_module->get_metadata("message")) : QString();
 }
 
+QVector<QStringList> Player::patternContent(int32_t pattern) const
+{
+    if (!m_module) return {};
+
+    std::int32_t channelCount = m_module->get_num_channels();
+    QVector<QStringList> patternContent;
+    for (std::int32_t row = 0; row < m_module->get_pattern_num_rows(pattern); row++) {
+        QStringList content;
+        for (std::int32_t channel = 0; channel < channelCount; channel++) {
+//            content << QString::fromStdString(m_module->format_pattern_row_channel_command(pattern, row, channel, openmpt::module::command_index::command_note));
+            content << QString::fromStdString(m_module->format_pattern_row_channel(pattern, row, channel, 2));
+        }
+        patternContent << content;
+    }
+
+    return patternContent;
+}
+
 void Player::seek(int32_t order, int32_t row)
 {
     if (!m_module) return;

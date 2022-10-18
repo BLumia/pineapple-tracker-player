@@ -11,6 +11,7 @@ Item {
     property int currentRow: 0
     property int rowCount: 1
     property int channelCount: 1
+    property var patternContent
     readonly property int colWidth: 40
 
     onChannelCountChanged:() => {
@@ -25,7 +26,7 @@ Item {
         currentIndex: currentRow
         orientation: ListView.Vertical
 
-        model: trackerContainer.rowCount
+        model: trackerContainer.patternContent
         preferredHighlightBegin: height / 2
         preferredHighlightEnd: height / 2
         highlightRangeMode: ListView.StrictlyEnforceRange
@@ -68,15 +69,16 @@ Item {
             ListView {
                 interactive: false
                 anchors.fill: parent
-                model: trackerContainer.channelCount
+                model: modelData
                 orientation: ListView.Horizontal
                 delegate: Rectangle {
                     color: delegateRow.ListView.isCurrentItem ? "yellow" : "green"
                     width: trackerContainer.colWidth
                     height: 30
                     Text {
-                        text: index;
+                        text: `<pre>${modelData}</pre>`;
                         anchors.fill: parent
+                        horizontalAlignment: Text.AlignHCenter
                         color: delegateRow.ListView.isCurrentItem ? "green" : "yellow"
                     }
                 }

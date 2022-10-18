@@ -70,6 +70,7 @@ public:
     Q_INVOKABLE QString artist() const;
     Q_INVOKABLE QString tracker() const;
     Q_INVOKABLE QString message() const;
+    Q_INVOKABLE QVector<QStringList> patternContent(std::int32_t pattern) const;
 
     Q_INVOKABLE void seek(std::int32_t order, std::int32_t row = 0);
     Q_INVOKABLE void setChannelMuteStatus(std::int32_t channel, bool mute);

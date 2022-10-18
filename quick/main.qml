@@ -109,6 +109,7 @@ ApplicationWindow {
                     channelCount: player.qml_channelCount
                     rowCount: player.qml_rowCount
                     currentRow: player.currentRow
+                    patternContent: player.qml_patternContent
                 }
             }
         }
@@ -120,6 +121,7 @@ ApplicationWindow {
 
         property int qml_channelCount
         property int qml_rowCount
+        property var qml_patternContent: [[]] // how to declare a vector<QStringList> ?
 
         onFileLoaded: {
             titleLabel.text = player.title()
@@ -130,6 +132,7 @@ ApplicationWindow {
         }
         onCurrentPatternChanged: {
             qml_rowCount = player.patternTotalRows(player.currentPattern)
+            qml_patternContent = player.patternContent(player.currentPattern)
         }
 
         onCurrentRowChanged: {
