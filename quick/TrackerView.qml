@@ -38,7 +38,7 @@ Item {
         header: Rectangle {
             height: 50
             z: 2 // keep header on the top of pattern rows
-            color: "grey"
+            color: "#0B0C10"
             width: parent.width
             ListView {
                 interactive: false
@@ -72,14 +72,14 @@ Item {
                 model: modelData
                 orientation: ListView.Horizontal
                 delegate: Rectangle {
-                    color: delegateRow.ListView.isCurrentItem ? "yellow" : "green"
+                    color: delegateRow.ListView.isCurrentItem ? "#00439F" : "#0B0C10"
                     width: trackerContainer.colWidth
                     height: 30
                     Text {
                         text: `<pre>${modelData}</pre>`;
                         anchors.fill: parent
                         horizontalAlignment: Text.AlignHCenter
-                        color: delegateRow.ListView.isCurrentItem ? "green" : "yellow"
+                        color: delegateRow.ListView.isCurrentItem ? "#FFFFFF" : "#DFECFF"
                     }
                 }
             }

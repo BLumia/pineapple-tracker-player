@@ -210,7 +210,7 @@ QVector<QStringList> Player::patternContent(int32_t pattern) const
         QStringList content;
         for (std::int32_t channel = 0; channel < channelCount; channel++) {
 //            content << QString::fromStdString(m_module->format_pattern_row_channel_command(pattern, row, channel, openmpt::module::command_index::command_note));
-            content << QString::fromStdString(m_module->format_pattern_row_channel(pattern, row, channel, 2));
+            content << QString::fromStdString(m_module->format_pattern_row_channel(pattern, row, channel, 3));
         }
         patternContent << content;
     }
