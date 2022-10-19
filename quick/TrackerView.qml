@@ -12,7 +12,13 @@ Item {
     property int rowCount: 1
     property int channelCount: 1
     property var patternContent
-    readonly property int colWidth: 40
+    property bool compactView: true
+    property int colWidth: 40 // internal
+
+    onCompactViewChanged:() => {
+        // compat (3 char, 40 width), full (13 char, 110 width)
+        colWidth = compactView ? 40 : 110
+    }
 
     onChannelCountChanged:() => {
         console.log("changed:", channelCount)
@@ -76,7 +82,7 @@ Item {
                     width: trackerContainer.colWidth
                     height: 30
                     Text {
-                        text: `<pre>${modelData}</pre>`;
+                        text: `<pre>${trackerContainer.compactView ? modelData.slice(0, 3) : modelData}</pre>`;
                         anchors.fill: parent
                         horizontalAlignment: Text.AlignHCenter
                         color: delegateRow.ListView.isCurrentItem ? "#FFFFFF" : "#DFECFF"

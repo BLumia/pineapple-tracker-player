@@ -68,6 +68,12 @@ ApplicationWindow {
                         player.pause()
                     }
                 }
+                Button {
+                    text: "Toggle Compact"
+                    onClicked: {
+                        trackerContainer.compactView = !trackerContainer.compactView
+                    }
+                }
                 Item {
                     Layout.fillWidth: true
                 }
