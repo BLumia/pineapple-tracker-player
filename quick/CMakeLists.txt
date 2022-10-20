@@ -28,6 +28,11 @@ QML_FILES
     TrackerView.qml
 )
 
+qt_add_resources(pineapple-tracker-player-quick resources.qrc
+    PREFIX "/icons"
+    FILES ../dist/pineapple-tracker-player.svg
+)
+
 target_link_libraries(pineapple-tracker-player-quick PRIVATE player-shared Qt::Quick)
 
 set_target_properties(pineapple-tracker-player-quick PROPERTIES
@@ -41,6 +46,19 @@ set_target_properties(pineapple-tracker-player-quick PROPERTIES
 install(TARGETS pineapple-tracker-player-quick
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+# install icon
+install (
+    FILES ../dist/pineapple-tracker-player.svg
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/icons/hicolor/48x48/apps"
+    RENAME pineapple-tracker-player.svg
+)
+
+# install shortcut
+install (
+    FILES ../dist/net.blumia.pineapple-tracker-player.desktop
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications"
+)
 
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(pineapple-tracker-player-quick)

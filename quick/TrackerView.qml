@@ -82,7 +82,9 @@ Item {
                     width: trackerContainer.colWidth
                     height: 30
                     Text {
-                        text: `<pre>${trackerContainer.compactView ? modelData.slice(0, 3) : modelData}</pre>`;
+                        text: trackerContainer.compactView ? modelData.slice(0, 3) : modelData;
+                        textFormat: Text.PlainText
+                        font.family: monoFontFamily
                         anchors.fill: parent
                         horizontalAlignment: Text.AlignHCenter
                         color: delegateRow.ListView.isCurrentItem ? "#FFFFFF" : "#DFECFF"

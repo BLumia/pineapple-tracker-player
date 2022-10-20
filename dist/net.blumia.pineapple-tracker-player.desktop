@@ -1,0 +1,15 @@
+[Desktop Entry]
+Categories=Audio;Player;
+Comment=Pineapple Tracker Player is a modular music player
+Comment[zh_CN]=菠萝トラッカー播放器是一个模块音乐播放器
+Exec=pienapple-tracker-player-quick -style Material %F
+GenericName=Modular Music Player
+GenericName[zh_CN]=模块音乐播放器
+Icon=pineapple-tracker-player
+Keywords=OpenMPT;XM;
+MimeType=audio/module-xm;audio/x-mod;
+Name=Pineapple Tracker Player
+Name[zh_CN]=菠萝トラッカー播放器
+StartupNotify=false
+Type=Application
+Terminal=false

@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 
@@ -18,6 +17,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void playFiles(const QList<QUrl> &urls);
+
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dropEvent(QDropEvent *event) override;
@@ -26,4 +27,3 @@ private:
     Ui::MainWindow *ui;
     Player * m_player = nullptr;
 };
-#endif // MAINWINDOW_H

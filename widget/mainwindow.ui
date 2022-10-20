@@ -19,7 +19,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="songTitle">
       <property name="text">
        <string>Song Title (Drop file to load/play)</string>
       </property>
@@ -90,7 +90,7 @@
      </layout>
     </item>
     <item>
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="playbackStatus">
       <property name="text">
        <string>Playback Status</string>
       </property>
@@ -118,13 +118,13 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionNew_All"/>
+    <addaction name="actionOpen"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
-  <action name="actionNew_All">
+  <action name="actionOpen">
    <property name="text">
-    <string>New All</string>
+    <string>&amp;Open</string>
    </property>
   </action>
  </widget>

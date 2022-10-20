@@ -16,6 +16,7 @@ ApplicationWindow {
 
             Platform.MenuItem {
                 text: qsTr("&Open")
+                shortcut: "Ctrl+O"
                 onTriggered: () => {
                     fileDialog.open()
                 }
@@ -107,7 +108,8 @@ ApplicationWindow {
                     TextArea {
                         id: messageArea
                         readOnly: true
-                        textFormat: TextEdit.RichText
+                        textFormat: Text.PlainText
+                        font.family: monoFontFamily
                     }
                 }
                 TrackerView {
@@ -133,7 +135,7 @@ ApplicationWindow {
             titleLabel.text = player.title()
             let artist = player.artist()
             artistTrackerLabel.text = artist === "" ? player.tracker() : artist + " (" + player.tracker() + ")"
-            messageArea.text = `<pre>${player.message()}</pre>`
+            messageArea.text = player.message()
             qml_channelCount = player.totalChannels()
         }
         onCurrentPatternChanged: {
@@ -150,6 +152,13 @@ ApplicationWindow {
             epoch.setSeconds(player.positionSec)
             let time = epoch.toLocaleTimeString(Qt.locale("C"), "h:mm:ss")
             playbackStatusLabel.text = `Order: ${order}/${orders} Row: ${row}/${rows} Time: ${time}`
+        }
+    }
+
+    Component.onCompleted: {
+        if (fileList.length > 0) {
+            player.load(fileList[0]);
+            player.play();
         }
     }
 

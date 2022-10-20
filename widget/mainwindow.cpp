@@ -2,6 +2,7 @@
 #include "./ui_mainwindow.h"
 
 #include "player.h"
+#include "util.h"
 
 #include <QFileDialog>
 #include <QMimeData>
@@ -15,13 +16,13 @@ MainWindow::MainWindow(QWidget *parent)
     , m_player(new Player(this))
 {
     ui->setupUi(this);
-    const QFont && fixedFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);
-    ui->plainTextEdit->setFont(fixedFont);
+    ui->plainTextEdit->setFont(Util::defaultMonoFont());
+    setWindowIcon(QIcon(":/icons/dist/pineapple-tracker-player.svg"));
 
     connect(m_player, &Player::fileLoaded, this, [this](){
         ui->horizontalSlider->setMaximum(m_player->totalOrders() - 1);
         ui->horizontalSlider->setValue(m_player->currentOrder());
-        ui->label->setText(m_player->title());
+        ui->songTitle->setText(m_player->title());
         const QString & artist = m_player->artist();
         ui->label_4->setText(artist.isEmpty() ? m_player->tracker() : (m_player->artist() + " (" + m_player->tracker() + ")") );
         ui->plainTextEdit->setPlainText(m_player->message());
@@ -33,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
     connect(m_player, &Player::currentRowChanged, this, [this](){
-        ui->label_2->setText(QString::asprintf("Order: %3d/%3d Row: %3d/%3d Time: %s",
+        ui->playbackStatus->setText(QString::asprintf("Order: %3d/%3d Row: %3d/%3d Time: %s",
                                  m_player->currentOrder(), m_player->totalOrders(),
                                  m_player->currentRow(), m_player->patternTotalRows(m_player->currentPattern()),
                                  QTime::fromMSecsSinceStartOfDay(0).addSecs(m_player->positionSec()).toString("h:mm:ss").toLatin1().data()
@@ -50,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent)
         QToolTip::showText(QCursor::pos(), QString("%1 dB").arg(value / 100.f), nullptr);
     });
 
-    connect(ui->actionNew_All, &QAction::triggered, this, [this](){
+    connect(ui->actionOpen, &QAction::triggered, this, [this](){
         const QUrl & url = QFileDialog::getOpenFileUrl(
                     this, "Select module file", {},
                     "Module Files (*.xm *.it *.mod *.s3m *.mptm)");
@@ -72,6 +73,14 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::playFiles(const QList<QUrl> &urls)
+{
+    if (urls.size() <= 0) return;
+
+    m_player->load(urls.first());
+    m_player->play();
 }
 
 void MainWindow::dragEnterEvent(QDragEnterEvent *event)

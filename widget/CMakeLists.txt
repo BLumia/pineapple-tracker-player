@@ -21,6 +21,11 @@ qt_add_executable(pineapple-tracker-player
     ${PROJECT_SOURCES}
 )
 
+qt_add_resources(pineapple-tracker-player resources.qrc
+    PREFIX "/icons"
+    FILES ../dist/pineapple-tracker-player.svg
+)
+
 target_link_libraries(pineapple-tracker-player PRIVATE player-shared Qt::Widgets)
 
 set_target_properties(pineapple-tracker-player PROPERTIES
