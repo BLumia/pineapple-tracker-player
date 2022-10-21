@@ -2,7 +2,7 @@
 Categories=Audio;AudioVideo;Player;
 Comment=Pineapple Tracker Player is a modular music player
 Comment[zh_CN]=菠萝トラッカー播放器是一个模块音乐播放器
-Exec=pineapple-tracker-player-quick -style Material %F
+Exec=env QT_QUICK_CONTROLS_MATERIAL_THEME=Dark pineapple-tracker-player-quick -style Material %F
 GenericName=Modular Music Player
 GenericName[zh_CN]=模块音乐播放器
 Icon=pineapple-tracker-player
