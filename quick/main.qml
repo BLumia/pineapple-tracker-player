@@ -52,6 +52,7 @@ ApplicationWindow {
                 Layout.fillWidth: true
                 value: player.currentOrder
                 to: player.totalOrders - 1
+                stepSize: 1
                 onMoved: () => {
                     player.seek(progressSlider.value)
                 }
