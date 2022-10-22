@@ -16,9 +16,20 @@ ApplicationWindow {
 
             Platform.MenuItem {
                 text: qsTr("&Open")
-                shortcut: "Ctrl+O"
+                shortcut: StandardKey.Open
                 onTriggered: () => {
                     fileDialog.open()
+                }
+            }
+        }
+
+        Platform.Menu {
+            title: qsTr("Options")
+
+            Platform.MenuItem {
+                text: qsTr("Set Mono &Font")
+                onTriggered: () => {
+                    fontDialog.open()
                 }
             }
         }
@@ -110,7 +121,7 @@ ApplicationWindow {
                         id: messageArea
                         readOnly: true
                         textFormat: Text.PlainText
-                        font.family: monoFontFamily
+                        font.family: fontDialog.selectedFont.family
                     }
                 }
                 TrackerView {
@@ -173,5 +184,11 @@ ApplicationWindow {
             player.load(fileDialog.currentFile);
             player.play();
         }
+    }
+
+    FontDialog {
+        id: fontDialog
+        selectedFont.family: monoFontFamily
+        options: FontDialog.MonospacedFonts
     }
 }

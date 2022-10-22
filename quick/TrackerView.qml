@@ -84,7 +84,7 @@ Item {
                     Text {
                         text: trackerContainer.compactView ? modelData.slice(0, 3) : modelData;
                         textFormat: Text.PlainText
-                        font.family: monoFontFamily
+                        font.family: fontDialog.selectedFont.family
                         anchors.fill: parent
                         horizontalAlignment: Text.AlignHCenter
                         color: delegateRow.ListView.isCurrentItem ? "#FFFFFF" : "#DFECFF"
