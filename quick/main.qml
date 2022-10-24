@@ -81,12 +81,6 @@ ApplicationWindow {
                         player.pause()
                     }
                 }
-                Button {
-                    text: "Toggle Compact"
-                    onClicked: {
-                        trackerContainer.compactView = !trackerContainer.compactView
-                    }
-                }
                 Item {
                     Layout.fillWidth: true
                 }
@@ -100,13 +94,44 @@ ApplicationWindow {
                     }
                 }
             }
-            Label {
-                id: playbackStatusLabel
-                text: "Playback Status"
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        stackLayout.currentIndex = stackLayout.currentIndex === 0 ? 1 : 0
+            RowLayout {
+                Layout.fillWidth: true
+                Label {
+                    id: playbackStatusLabel
+                    text: "Playback Status"
+                }
+                Item {
+                    Layout.fillWidth: true
+                }
+                Label {
+                    text: "Message"
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            stackLayout.currentIndex = 0
+                        }
+                    }
+                }
+                Label {
+                    text: "Pattern"
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            if (stackLayout.currentIndex !== 1) {
+                                stackLayout.currentIndex = 1
+                                return
+                            }
+                            trackerContainer.compactView = !trackerContainer.compactView
+                        }
+                    }
+                }
+                Label {
+                    text: "Instruments"
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            stackLayout.currentIndex = 2
+                        }
                     }
                 }
             }
@@ -131,6 +156,10 @@ ApplicationWindow {
                     currentRow: player.currentRow
                     patternContent: player.qml_patternContent
                 }
+                InstrumentView {
+                    id: instrumentsContainer
+                    instruments: player.qml_instrumentNames
+                }
             }
         }
     }
@@ -141,6 +170,7 @@ ApplicationWindow {
 
         property int qml_channelCount
         property int qml_rowCount
+        property list<string> qml_instrumentNames
         property var qml_patternContent: [[]] // how to declare a vector<QStringList> ?
 
         onFileLoaded: {
@@ -149,6 +179,7 @@ ApplicationWindow {
             artistTrackerLabel.text = artist === "" ? player.tracker() : artist + " (" + player.tracker() + ")"
             messageArea.text = player.message()
             qml_channelCount = player.totalChannels()
+            qml_instrumentNames = player.instrumentNames()
         }
         onCurrentPatternChanged: {
             qml_rowCount = player.patternTotalRows(player.currentPattern)

@@ -62,8 +62,8 @@ public:
     Q_INVOKABLE std::int32_t totalChannels() const;
     std::int32_t currentSubsong() const;
     std::int32_t totalSubsongs() const;
-    QStringList instrumentNames() const;
-    std::int32_t totalInstruments() const;
+    Q_INVOKABLE QStringList instrumentNames() const;
+    Q_INVOKABLE std::int32_t totalInstruments() const;
     std::int32_t totalSamples() const;
 
     Q_INVOKABLE QString title() const;
@@ -74,6 +74,7 @@ public:
 
     Q_INVOKABLE void seek(std::int32_t order, std::int32_t row = 0);
     Q_INVOKABLE void setChannelMuteStatus(std::int32_t channel, bool mute);
+    Q_INVOKABLE void setInstrumentMuteStatus(std::int32_t instrument, bool mute);
     Q_INVOKABLE void setSubsong(std::int32_t subsong);
     Q_INVOKABLE void setGlobalVolume(double volume);
     Q_INVOKABLE void setGain(std::int32_t dBx100 = 0);

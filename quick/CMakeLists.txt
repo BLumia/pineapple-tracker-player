@@ -25,6 +25,7 @@ URI player
 VERSION 1.0
 QML_FILES
     main.qml
+    InstrumentView.qml
     TrackerView.qml
 )
 

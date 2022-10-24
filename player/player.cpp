@@ -232,6 +232,12 @@ void Player::setChannelMuteStatus(int32_t channel, bool mute)
     m_interactive->set_channel_mute_status(channel, mute);
 }
 
+void Player::setInstrumentMuteStatus(int32_t instrument, bool mute)
+{
+    if (!m_interactive) return;
+    m_interactive->set_instrument_mute_status(instrument, mute);
+}
+
 void Player::setSubsong(int32_t subsong)
 {
     if (!m_module) return;
