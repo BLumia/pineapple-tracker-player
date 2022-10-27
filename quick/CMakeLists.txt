@@ -27,6 +27,7 @@ QML_FILES
     main.qml
     InstrumentView.qml
     TrackerView.qml
+    components/InstrumentItem.qml
 )
 
 qt_add_resources(pineapple-tracker-player-quick resources.qrc

@@ -3,6 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Dialogs
 import Qt.labs.platform 1 as Platform
+import "./components"
 
 Item {
     id: instrumentsContainer
@@ -10,21 +11,41 @@ Item {
 
     property list<string> instruments
 
+    onInstrumentsChanged: () => {
+        instrumentModel.clear()
+        instruments.forEach((instrument) => {
+            instrumentModel.append({
+                name: instrument,
+                mute: false
+            })
+        })
+        console.log(instrumentModel)
+    }
+
+    ListModel {
+        id: instrumentModel
+
+        ListElement {
+            name: "Instrument will be displayed here"
+            mute: false
+        }
+    }
+
     ListView {
         clip: true
         anchors.fill: parent
         orientation: ListView.Vertical
         flickableDirection: Flickable.VerticalFlick
-        model: instrumentsContainer.instruments
-        delegate: Button {
-            checkable: true
-            checked: true
+        model: instrumentModel
+        delegate: InstrumentItem {
             width: ListView.view.width
-            height: 30
-            text: modelData === "" ? index : modelData
-            onPressed: () => {
-                player.setInstrumentMuteStatus(index, checked)
-                console.log("instrument toggle mute", index, checked)
+            fontFamily: fontDialog.selectedFont.family
+            muted: mute
+            instrumentName: name
+            instrumentIndex: index
+            onClicked: () => {
+                instrumentModel.set(index, {'mute': !mute})
+                player.setInstrumentMuteStatus(index, muted)
             }
         }
     }
