@@ -76,11 +76,13 @@ void Player::play()
 {
     if (!m_module) return;
     m_isPlaying = true;
+    emit playbackStatusChanged();
 }
 
 void Player::pause()
 {
     m_isPlaying = false;
+    emit playbackStatusChanged();
 }
 
 int Player::streamCallback(const void *inputBuffer, void *outputBuffer, unsigned long numFrames,
@@ -90,6 +92,14 @@ int Player::streamCallback(const void *inputBuffer, void *outputBuffer, unsigned
     if (m_module && m_isPlaying) {
         std::size_t count = m_module->read_interleaved_stereo(SAMPLE_RATE, numFrames, buffer);
         updateCachedState();
+        if (count == 0) {
+            // api like get_current_order() will return as it rewinded to the beginning of the song
+            // but read() will still return 0 frame and won't write to the buffer...
+            seek(0);
+            m_isPlaying = false;
+            emit playbackStatusChanged();
+            emit endOfSongReached();
+        }
     } else {
         std::fill(buffer, buffer + numFrames * 2, 0);
     }
@@ -216,6 +226,24 @@ QVector<QStringList> Player::patternContent(int32_t pattern) const
     }
 
     return patternContent;
+}
+
+bool Player::isPlaying() const
+{
+    return m_isPlaying;
+}
+
+int32_t Player::repeatCount() const
+{
+    return m_options.repeatCount + 1;
+}
+
+// 0: inf, 1: single time, etc. NOT a direct wrapper for the libopenmpt API.
+void Player::setRepeatCount(int32_t repeatCount)
+{
+    m_options.repeatCount = repeatCount - 1;
+    if (m_module) m_module->set_repeat_count(m_options.repeatCount);
+    emit repeatCountChanged();
 }
 
 void Player::seek(int32_t order, int32_t row)

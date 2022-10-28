@@ -70,17 +70,20 @@ ApplicationWindow {
             }
             RowLayout {
                 Button {
-                    text: "Play"
+                    text: player.isPlaying ? "Pause" : "Play"
                     onClicked: {
-                        player.play()
+                        player.isPlaying ? player.pause() : player.play()
                     }
                 }
-                Button {
-                    text: "Pause"
-                    onClicked: {
-                        player.pause()
+                SpinBox {
+                    value: player.repeatCount
+                    from: 0
+                    to: 99
+                    onValueChanged: {
+                        player.repeatCount = value
                     }
                 }
+
                 Item {
                     Layout.fillWidth: true
                 }
