@@ -14,6 +14,7 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 set(PROJECT_SOURCES
     main.cpp
     mainwindow.h mainwindow.cpp mainwindow.ui
+    instrumentsmodel.h instrumentsmodel.cpp
 )
 
 qt_add_executable(pineapple-tracker-player

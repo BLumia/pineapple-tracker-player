@@ -4,23 +4,34 @@
 #include "player.h"
 #include "util.h"
 
+#include "instrumentsmodel.h"
+
 #include <QFileDialog>
 #include <QMimeData>
 #include <QMouseEvent>
 #include <QToolTip>
 #include <QListView>
-#include <QStringListModel>
 #include <QTime>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , m_player(new Player(this))
+    , m_instrumentsModel(new InstrumentsModel(m_player, this))
 {
     ui->setupUi(this);
     ui->plainTextEdit->setFont(Util::defaultMonoFont());
     ui->instrumentsListView->setFont(Util::defaultMonoFont());
+    ui->instrumentsListView->setModel(m_instrumentsModel);
     setWindowIcon(QIcon(":/icons/dist/pineapple-tracker-player.svg"));
+
+    connect(ui->instrumentsListView, &QListView::clicked, this, [this](const QModelIndex &index){
+        m_instrumentsModel->setData(index,
+                                    index.data(Qt::CheckStateRole) == Qt::Unchecked
+                                        ? Qt::Checked
+                                        : Qt::Unchecked,
+                                    Qt::CheckStateRole);
+    });
 
     connect(m_player, &Player::fileLoaded, this, [this](){
         ui->horizontalSlider->setMaximum(m_player->totalOrders() - 1);
@@ -30,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
         ui->label_4->setText(artist.isEmpty() ? m_player->tracker() : (m_player->artist() + " (" + m_player->tracker() + ")") );
         ui->plainTextEdit->setPlainText(m_player->message());
 
-        ui->instrumentsListView->setModel(new QStringListModel(m_player->instrumentNames()));
+        m_instrumentsModel->setStringList(m_player->instrumentNames());
     });
 
     connect(m_player, &Player::playbackStatusChanged, this, [this](){

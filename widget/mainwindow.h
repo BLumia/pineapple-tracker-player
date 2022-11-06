@@ -9,6 +9,7 @@ class QDropEvent;
 QT_END_NAMESPACE
 
 class Player;
+class InstrumentsModel;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -31,4 +32,5 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Player * m_player = nullptr;
+    InstrumentsModel * m_instrumentsModel = nullptr;
 };
