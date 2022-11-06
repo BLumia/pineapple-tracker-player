@@ -173,7 +173,7 @@ ApplicationWindow {
 
         property int qml_channelCount
         property int qml_rowCount
-        property list<string> qml_instrumentNames
+        property var qml_instrumentNames: [] // since we cannot declare list<string>
         property var qml_patternContent: [[]] // how to declare a vector<QStringList> ?
 
         onFileLoaded: {

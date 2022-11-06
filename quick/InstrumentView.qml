@@ -9,7 +9,7 @@ Item {
     id: instrumentsContainer
     clip: true
 
-    property list<string> instruments
+    property var instruments: []
 
     onInstrumentsChanged: () => {
         instrumentModel.clear()

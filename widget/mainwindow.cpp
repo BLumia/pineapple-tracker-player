@@ -8,6 +8,8 @@
 #include <QMimeData>
 #include <QMouseEvent>
 #include <QToolTip>
+#include <QListView>
+#include <QStringListModel>
 #include <QTime>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -17,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->plainTextEdit->setFont(Util::defaultMonoFont());
+    ui->instrumentsListView->setFont(Util::defaultMonoFont());
     setWindowIcon(QIcon(":/icons/dist/pineapple-tracker-player.svg"));
 
     connect(m_player, &Player::fileLoaded, this, [this](){
@@ -26,6 +29,12 @@ MainWindow::MainWindow(QWidget *parent)
         const QString & artist = m_player->artist();
         ui->label_4->setText(artist.isEmpty() ? m_player->tracker() : (m_player->artist() + " (" + m_player->tracker() + ")") );
         ui->plainTextEdit->setPlainText(m_player->message());
+
+        ui->instrumentsListView->setModel(new QStringListModel(m_player->instrumentNames()));
+    });
+
+    connect(m_player, &Player::playbackStatusChanged, this, [this](){
+        ui->playButton->setText(m_player->isPlaying() ? "Pause" : "Play");
     });
 
     connect(m_player, &Player::currentOrderChanged, this, [this](){
@@ -61,12 +70,8 @@ MainWindow::MainWindow(QWidget *parent)
         }
     });
 
-    connect(ui->pushButton_2, &QPushButton::clicked, this, [this](){
-        m_player->play();
-    });
-
-    connect(ui->pushButton_3, &QPushButton::clicked, this, [this](){
-        m_player->pause();
+    connect(ui->playButton, &QPushButton::clicked, this, [this](){
+        m_player->isPlaying() ? m_player->pause() : m_player->play();
     });
 }
 
@@ -108,3 +113,15 @@ void MainWindow::dropEvent(QDropEvent *event)
         }
     }
 }
+
+void MainWindow::on_instrumentsBtn_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->instrumentsPage);
+}
+
+
+void MainWindow::on_messageBtn_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->messagePage);
+}
+
