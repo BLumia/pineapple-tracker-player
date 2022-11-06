@@ -44,6 +44,7 @@ public:
     Q_PROPERTY(int currentPattern READ currentPattern NOTIFY currentPatternChanged)
     Q_PROPERTY(int currentRow READ currentRow NOTIFY currentRowChanged)
     Q_PROPERTY(int repeatCount READ repeatCount WRITE setRepeatCount NOTIFY repeatCountChanged)
+    Q_PROPERTY(int gain READ gain WRITE setGain NOTIFY gainChanged)
     Q_PROPERTY(bool isPlaying READ isPlaying NOTIFY playbackStatusChanged)
 
     Q_INVOKABLE bool load(const QUrl &filename);
@@ -82,7 +83,8 @@ public:
     Q_INVOKABLE void setInstrumentMuteStatus(std::int32_t instrument, bool mute);
     Q_INVOKABLE void setSubsong(std::int32_t subsong);
     Q_INVOKABLE void setGlobalVolume(double volume);
-    Q_INVOKABLE void setGain(std::int32_t dBx100 = 0);
+    std::int32_t gain() const;
+    void setGain(std::int32_t dBx100 = 0);
 
 signals:
     void currentOrderChanged();
@@ -93,6 +95,7 @@ signals:
     void endOfSongReached();
     void playbackStatusChanged(); // can be emitted even if it's not changed
     void repeatCountChanged();
+    void gainChanged();
 
 private:
     void updateCachedState();

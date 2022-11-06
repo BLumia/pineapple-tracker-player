@@ -91,9 +91,9 @@ ApplicationWindow {
                     id: gainSlider
                     from: -1500
                     to: 1000
-                    value: 0
+                    value: player.gain
                     onMoved: () => {
-                        player.setGain(gainSlider.value)
+                        player.gain = value
                     }
                 }
             }

@@ -282,9 +282,15 @@ void Player::setGlobalVolume(double volume)
     m_interactive->set_global_volume(volume);
 }
 
+int32_t Player::gain() const
+{
+    return m_options.gain;
+}
+
 void Player::setGain(std::int32_t dBx100)
 {
     m_options.gain = dBx100;
+    emit gainChanged();
     if (!m_module) return;
     m_module->set_render_param(openmpt::module::RENDER_MASTERGAIN_MILLIBEL, m_options.gain);
 }
