@@ -9,7 +9,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Quick)
+find_package(QT NAMES Qt6 REQUIRED COMPONENTS Core Quick)
+find_package(Qt6 REQUIRED COMPONENTS Core Quick)
 
 set(PROJECT_SOURCES
     main.cpp
@@ -63,5 +64,6 @@ install (
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
+#    qt_import_qml_plugins(pineapple-tracker-player-quick) # do we really need this?
     qt_finalize_executable(pineapple-tracker-player-quick)
 endif()

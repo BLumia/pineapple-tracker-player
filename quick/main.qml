@@ -2,19 +2,22 @@ import QtQuick 2.4
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Dialogs
-import Qt.labs.platform 1 as Platform
+//import Qt.labs.platform 1 as Platform
 import Pineapple.TrackerPlayer 1
 
 ApplicationWindow {
     visible: true
     width: 600
     height: 500
-    // QtQuick.Controls do have MenuBar and related stuff, but it don't have the native look and feel.
-    Platform.MenuBar {
-        Platform.Menu {
+    // QQC2 do have MenuBar and related stuff, but it don't have the native look and feel.
+    // Qt.labs.platform 1 has a native one but it will cause linking issue while using
+    // qt6-static 6.2.1-2 from MSYS2, so switch to QQC2 for now...
+    menuBar: MenuBar {
+        id: appMenu
+        Menu {
             title: qsTr("&File")
 
-            Platform.MenuItem {
+            Action {
                 text: qsTr("&Open")
                 shortcut: StandardKey.Open
                 onTriggered: () => {
@@ -23,13 +26,21 @@ ApplicationWindow {
             }
         }
 
-        Platform.Menu {
+        Menu {
             title: qsTr("Options")
 
-            Platform.MenuItem {
+            Action {
                 text: qsTr("Set Mono &Font")
                 onTriggered: () => {
                     fontDialog.open()
+                }
+            }
+
+            Action {
+                text: qsTr("Toggle &Menu Bar Visibility")
+                shortcut: "Ctrl+Shift+M"
+                onTriggered: () => {
+                    appMenu.visible = !appMenu.visible
                 }
             }
         }
