@@ -14,8 +14,8 @@ jobs:
           msystem: MINGW64
           update: true
           pacboy: >-
-            toolchain:p ninja:p cmake:p
-            jasper:p
+            toolchain:p ninja:p cmake:p extra-cmake-modules:p
+            jasper:p icoutils:p
             qt6-static:p libopenmpt:p portaudio:p
       - name: Build pineapple-tracker-player
         run: |

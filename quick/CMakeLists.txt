@@ -11,6 +11,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Core Quick)
 find_package(Qt6 REQUIRED COMPONENTS Core Quick)
+find_package(ECM 5.83.0 NO_MODULE)
+
+if(ECM_FOUND)
+    set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+    include(ECMAddAppIcon)
+endif()
 
 set(PROJECT_SOURCES
     main.cpp
@@ -20,6 +26,16 @@ qt_add_executable(pineapple-tracker-player-quick
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
 )
+
+if(ECM_FOUND)
+    ecm_add_app_icon(pineapple-tracker-player-quick
+    ICONS
+        ../dist/512-pineapple-tracker-player.png
+        ../dist/256-pineapple-tracker-player.png
+        ../dist/64-pineapple-tracker-player.png
+        ../dist/pineapple-tracker-player.svg
+    )
+endif()
 
 qt_add_qml_module(pineapple-tracker-player-quick
 URI player
