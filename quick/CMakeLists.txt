@@ -69,7 +69,7 @@ install(TARGETS pineapple-tracker-player-quick
 # install icon
 install (
     FILES ../dist/pineapple-tracker-player.svg
-    DESTINATION "${CMAKE_INSTALL_DATADIR}/icons/hicolor/48x48/apps"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps"
     RENAME pineapple-tracker-player.svg
 )
 
