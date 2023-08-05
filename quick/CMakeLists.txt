@@ -9,8 +9,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 REQUIRED COMPONENTS Core Quick)
-find_package(Qt6 REQUIRED COMPONENTS Core Quick)
+find_package(QT NAMES Qt6 REQUIRED COMPONENTS Core Quick LinguistTools)
+find_package(Qt6 REQUIRED COMPONENTS Core Quick LinguistTools)
 find_package(ECM 5.83.0 NO_MODULE)
 
 if(ECM_FOUND)
@@ -45,6 +45,12 @@ QML_FILES
     InstrumentView.qml
     TrackerView.qml
     components/InstrumentItem.qml
+)
+
+qt_add_translations(pineapple-tracker-player-quick
+TS_FILES
+    translations/pineapple-tracker-player.ts
+    translations/pineapple-tracker-player_zh_CN.ts
 )
 
 qt_add_resources(pineapple-tracker-player-quick resources.qrc

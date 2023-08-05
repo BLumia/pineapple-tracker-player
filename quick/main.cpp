@@ -7,10 +7,16 @@
 #include <QQmlApplicationEngine>
 #include <QUrl>
 #include <QIcon>
+#include <QTranslator>
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+
+    QTranslator translator;
+    if (translator.load(QLocale(), QLatin1String("pineapple-tracker-player"), QLatin1String("_"), QLatin1String(":/i18n"))) {
+        app.installTranslator(&translator);
+    }
 
     app.setWindowIcon(QIcon(":/icons/dist/pineapple-tracker-player.svg"));
 

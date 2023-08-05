@@ -63,11 +63,11 @@ ApplicationWindow {
             anchors.margins: 8
             Label {
                 id: titleLabel
-                text: "Song Title (Drop file to load/play)"
+                text: qsTr("Song Title (Drop file to load/play)")
             }
             Label {
                 id: artistTrackerLabel
-                text: "Artist (Tracker)"
+                text: qsTr("Artist (Tracker)")
             }
             Slider {
                 id: progressSlider
@@ -81,7 +81,7 @@ ApplicationWindow {
             }
             RowLayout {
                 Button {
-                    text: player.isPlaying ? "Pause" : "Play"
+                    text: player.isPlaying ? qsTr("Pause") : qsTr("Play")
                     onClicked: {
                         player.isPlaying ? player.pause() : player.play()
                     }
@@ -112,7 +112,7 @@ ApplicationWindow {
                 Layout.fillWidth: true
                 Label {
                     id: playbackStatusLabel
-                    text: "Playback Status"
+                    text: qsTr("Playback Status")
                 }
                 Item {
                     Layout.fillWidth: true
@@ -221,7 +221,7 @@ ApplicationWindow {
 
     FileDialog {
         id: fileDialog
-        title: "Select module file"
+        title: qsTr("Select module file")
         nameFilters: [
             "Module Files (*.xm *.it *.mod *.s3m *.mptm)"
         ]
