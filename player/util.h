@@ -2,6 +2,7 @@
 
 #include <QFont>
 #include <QList>
+#include <QUrl>
 
 class Util
 {
