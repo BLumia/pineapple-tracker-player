@@ -1,5 +1,5 @@
 name: Windows MSYS2 Build
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
@@ -8,7 +8,7 @@ jobs:
       run:
         shell: msys2 {0}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: msys2/setup-msys2@v2
         with:
           msystem: MINGW64
@@ -33,7 +33,7 @@ jobs:
           # rm deps-trackerplayer.txt
           # done
           cd ../../
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: msys2-mingw-w64-x86_64-windows
           path: build/package_workspace/*
