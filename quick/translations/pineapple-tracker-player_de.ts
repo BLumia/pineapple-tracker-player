@@ -7,19 +7,19 @@
         <location filename="../main.qml" line="18"/>
         <location/>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Datei</translation>
     </message>
     <message>
         <location filename="../main.qml" line="21"/>
         <location/>
         <source>&amp;Open</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Öffnen</translation>
     </message>
     <message>
         <location filename="../main.qml" line="30"/>
         <location/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Optionen</translation>
     </message>
     <message>
         <location filename="../main.qml" line="33"/>
@@ -31,47 +31,47 @@
         <location filename="../main.qml" line="40"/>
         <location/>
         <source>Toggle &amp;Menu Bar Visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Sichtbarkeit der &amp;Menüleiste umschalten</translation>
     </message>
     <message>
         <location filename="../main.qml" line="66"/>
         <location/>
         <source>Song Title (Drop file to load/play)</source>
-        <translation type="unfinished"></translation>
+        <translation>Songtitel (Datei zum Laden/Abspielen ablegen)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="70"/>
         <location/>
         <source>Artist (Tracker)</source>
-        <translation type="unfinished"></translation>
+        <translation>Künstler (Tracker)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="84"/>
         <location/>
         <source>Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>Pause</translation>
     </message>
     <message>
         <location filename="../main.qml" line="84"/>
         <location/>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiedergabe</translation>
     </message>
     <message>
         <location filename="../main.qml" line="115"/>
         <source>Playback Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiedergabestatus</translation>
     </message>
     <message>
         <location filename="../main.qml" line="224"/>
         <location/>
         <source>Select module file</source>
-        <translation type="unfinished"></translation>
+        <translation>Moduldatei auswählen</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="24"/>
         <source>File list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateiliste.</translation>
     </message>
 </context>
 </TS>
