@@ -47,14 +47,18 @@ QML_FILES
     components/InstrumentItem.qml
 )
 
-qt_add_translations(pineapple-tracker-player-quick
-TS_FILES
-    translations/pineapple-tracker-player.ts
-    translations/pineapple-tracker-player_nl.ts
-    translations/pineapple-tracker-player_pl.ts
-    translations/pineapple-tracker-player_tr.ts
-    translations/pineapple-tracker-player_zh_CN.ts
-)
+# https://forum.qt.io/topic/155823/cmake-does-not-work-with-qt-6-7-0
+# https://bugreports.qt.io/browse/QTBUG-126167
+if (Qt6LinguistTools_VERSION VERSION_LESS 6.7.0 OR Qt6LinguistTools_VERSION VERSION_GREATER 6.7.2)
+    qt_add_translations(pineapple-tracker-player-quick
+    TS_FILES
+        translations/pineapple-tracker-player.ts
+        translations/pineapple-tracker-player_nl.ts
+        translations/pineapple-tracker-player_pl.ts
+        translations/pineapple-tracker-player_tr.ts
+        translations/pineapple-tracker-player_zh_CN.ts
+    )
+endif()
 
 qt_add_resources(pineapple-tracker-player-quick resources.qrc
     PREFIX "/icons"
