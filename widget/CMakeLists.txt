@@ -28,6 +28,10 @@ qt_add_executable(pineapple-tracker-player
     ${PROJECT_SOURCES}
 )
 
+target_compile_definitions(pineapple-tracker-player PRIVATE
+    PTPLAY_VERSION_STRING="${CMAKE_PROJECT_VERSION}"
+)
+
 if(ECM_FOUND)
     ecm_add_app_icon(pineapple-tracker-player
     ICONS

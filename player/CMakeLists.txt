@@ -18,6 +18,7 @@ pkg_check_modules(PortAudio REQUIRED portaudiocpp IMPORTED_TARGET)
 set(PROJECT_SOURCES
     player.h player.cpp
     util.h util.cpp
+    playlistmanager.h playlistmanager.cpp
 )
 
 qt_add_library(player-shared OBJECT

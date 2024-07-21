@@ -1,5 +1,7 @@
 #include "util.h"
 
+#include <utility>
+
 #include <QUrl>
 #include <QFile>
 #include <QFontDatabase>
@@ -7,7 +9,7 @@
 QList<QUrl> Util::convertToUrlList(const QStringList &files)
 {
     QList<QUrl> urlList;
-    for (const QString & str : qAsConst(files)) {
+    for (const QString & str : std::as_const(files)) {
         if (!QFile::exists(str)) continue;
         QUrl url = QUrl::fromLocalFile(str);
         if (url.isValid()) {
