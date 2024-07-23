@@ -2,7 +2,6 @@ import QtQuick 2.4
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Dialogs
-//import Qt.labs.platform 1 as Platform
 import Pineapple.TrackerPlayer 1
 
 ApplicationWindow {
@@ -44,6 +43,17 @@ ApplicationWindow {
                 }
             }
         }
+
+        Menu {
+            title: qsTr("&Help")
+
+            Action {
+                text: qsTr("About")
+                onTriggered: () => {
+                    aboutDialog.open()
+                }
+            }
+        }
     }
 
     DropArea {
@@ -54,6 +64,7 @@ ApplicationWindow {
         }
         onDropped: (drop) => {
             if (drop.urls.length <= 0) return;
+            playlistManager.loadPlaylist(drop.urls)
             player.load(drop.urls[0]);
             player.play();
         }
@@ -118,6 +129,15 @@ ApplicationWindow {
                     Layout.fillWidth: true
                 }
                 Label {
+                    text: "Playlist"
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            stackLayout.currentIndex = 3
+                        }
+                    }
+                }
+                Label {
                     text: "Message"
                     MouseArea {
                         anchors.fill: parent
@@ -174,6 +194,20 @@ ApplicationWindow {
                     id: instrumentsContainer
                     instruments: player.qml_instrumentNames
                 }
+                ListView {
+                    id: playlistView
+                    model: playlistManager.model
+                    clip: true
+                    delegate: ItemDelegate {
+                        width: parent.width
+                        text: model.display
+                        onClicked: function() {
+                            playlistManager.currentIndex = index
+                            player.load(model.url);
+                            player.play();
+                        }
+                    }
+                }
             }
         }
     }
@@ -212,8 +246,14 @@ ApplicationWindow {
         }
     }
 
+    PlaylistManager {
+        id: playlistManager
+        autoLoadFilterSuffixes: ["*.xm", "*.it", "*.mod", "*.s3m", "*.mptm"]
+    }
+
     Component.onCompleted: {
         if (fileList.length > 0) {
+            playlistManager.loadPlaylist(fileList)
             player.load(fileList[0]);
             player.play();
         }
@@ -226,6 +266,7 @@ ApplicationWindow {
             "Module Files (*.xm *.it *.mod *.s3m *.mptm)"
         ]
         onAccepted: {
+            playlistManager.loadPlaylist(fileDialog.currentFile)
             player.load(fileDialog.currentFile);
             player.play();
         }
@@ -235,5 +276,35 @@ ApplicationWindow {
         id: fontDialog
         selectedFont.family: monoFontFamily
         options: FontDialog.MonospacedFonts
+    }
+
+    Dialog {
+        id: aboutDialog
+        title: qsTr("About")
+        anchors.centerIn: parent
+        ColumnLayout {
+            Label {
+                textFormat: Text.MarkdownText
+                text: `Pineapple Tracker Player
+
+Based on the following free software libraries:
+
+- [Qt](https://www.qt.io/)
+- [PortAudio](https://www.portaudio.com/)
+- [libopenmpt](https://lib.openmpt.org/libopenmpt/)
+
+[Source Code](https://github.com/BLumia/pineapple-tracker-player)
+
+Copyright &copy; 2024 [BLumia](https://github.com/BLumia/)
+`
+                onLinkActivated: function(link) {
+                    Qt.openUrlExternally(link)
+                }
+            }
+            DialogButtonBox {
+                standardButtons: DialogButtonBox.Ok
+                onAccepted: aboutDialog.close()
+            }
+        }
     }
 }

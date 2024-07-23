@@ -1,4 +1,5 @@
 #include "player.h"
+#include "playlistmanager.h"
 #include "util.h"
 
 #include <QQmlContext>
@@ -28,6 +29,8 @@ int main(int argc, char *argv[])
     QStringList urlStrList = parser.positionalArguments();
     QList<QUrl> urlsToLoad = Util::convertToUrlList(urlStrList);
 
+    qmlRegisterUncreatableType<PlaylistModel>("Pineapple.TrackerPlayer", 1, 0, "PlaylistModel", "managed by PlaylistManager");
+    qmlRegisterType<PlaylistManager>("Pineapple.TrackerPlayer", 1, 0, "PlaylistManager");
     qmlRegisterType<Player>("Pineapple.TrackerPlayer", 1, 0, "TrackerPlayer");
 
     QQmlApplicationEngine engine;
