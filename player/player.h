@@ -11,12 +11,7 @@ namespace openmpt {
     }
 }
 
-namespace portaudio {
-    template<typename T>
-    class MemFunCallbackStream;
-}
-struct PaStreamCallbackTimeInfo;
-typedef unsigned long PaStreamCallbackFlags;
+typedef void PaStream;
 
 struct CachedPlaybackState
 {
@@ -52,8 +47,8 @@ public:
     Q_INVOKABLE void pause();
     bool isPlaying() const;
 
-    int streamCallback(const void *inputBuffer, void *outputBuffer, unsigned long numFrames,
-                       const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags);
+    bool setupAndStartStream();
+    int streamCallback(const void *inputBuffer, void *outputBuffer, unsigned long numFrames);
 
     std::int32_t currentOrder() const;
     std::int32_t totalOrders() const;
@@ -101,7 +96,8 @@ private:
     void updateCachedState();
 
 private:
-    portaudio::MemFunCallbackStream<Player> * m_stream;
+    PaStream * m_stream;
+    std::function<void(unsigned int)> mf_playbackCallback;
     openmpt::module_ext * m_module = nullptr;
     openmpt::ext::interactive * m_interactive = nullptr;
     CachedPlaybackState m_cachedState;

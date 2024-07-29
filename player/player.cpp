@@ -9,7 +9,7 @@
 #include <libopenmpt/libopenmpt.hpp>
 #include <libopenmpt/libopenmpt_ext.hpp>
 
-#include <portaudiocpp/PortAudioCpp.hxx>
+#include <portaudio.h>
 
 constexpr std::int32_t SAMPLE_RATE = 48000;
 
@@ -23,25 +23,13 @@ Player::Player(QObject *parent)
     : QObject{parent}
     , m_isPlaying(false)
 {
-    portaudio::AutoSystem pa_initializer;
-    pa_initializer.initialize();
-    portaudio::System & pa = portaudio::System::instance();
-    portaudio::Device & outputDevice = pa.defaultOutputDevice();
-    portaudio::DirectionSpecificStreamParameters inputParams(
-                portaudio::DirectionSpecificStreamParameters::null());
-    portaudio::DirectionSpecificStreamParameters outputParams(
-                outputDevice, 2, portaudio::FLOAT32, true,
-                outputDevice.defaultHighOutputLatency(), 0);
-    portaudio::StreamParameters stream_params(
-                inputParams, outputParams,
-                SAMPLE_RATE, paFramesPerBufferUnspecified, paNoFlag);
-    m_stream = new portaudio::MemFunCallbackStream<Player>(stream_params, *this, &Player::streamCallback);
-    m_stream->start();
+    Pa_Initialize();
+    setupAndStartStream();
 }
 
 Player::~Player()
 {
-    m_stream->stop();
+    Pa_StopStream(m_stream);
 }
 
 bool Player::load(const QUrl &filename)
@@ -75,6 +63,15 @@ bool Player::load(const QUrl &filename)
 void Player::play()
 {
     if (!m_module) return;
+    PaError ret = Pa_IsStreamActive(m_stream);
+    if (ret == 0) {
+        qDebug() << "Playback stream stopped, restarting...";
+        bool succ = setupAndStartStream();
+        if (!succ) {
+            qDebug() << "Not able to restart playback stream";
+            return;
+        }
+    }
     m_isPlaying = true;
     emit playbackStatusChanged();
 }
@@ -85,8 +82,7 @@ void Player::pause()
     emit playbackStatusChanged();
 }
 
-int Player::streamCallback(const void *inputBuffer, void *outputBuffer, unsigned long numFrames,
-                           const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags)
+int Player::streamCallback(const void *inputBuffer, void *outputBuffer, unsigned long numFrames)
 {
     float* buffer = (float*)outputBuffer;
     if (m_module && m_isPlaying) {
@@ -231,6 +227,22 @@ QVector<QStringList> Player::patternContent(int32_t pattern) const
 bool Player::isPlaying() const
 {
     return m_isPlaying;
+}
+
+bool Player::setupAndStartStream()
+{
+    Pa_OpenDefaultStream(&m_stream, 0, 2, paFloat32, SAMPLE_RATE, paFramesPerBufferUnspecified,
+        +[](const void *inputBuffer, void *outputBuffer,
+            unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo* timeInfo,
+            PaStreamCallbackFlags statusFlags, void *userData) -> int {
+            return ((Player *)userData)->streamCallback(inputBuffer, outputBuffer, framesPerBuffer);
+        }, this);
+    PaError err = Pa_StartStream(m_stream);
+    if (err != paNoError) {
+        // TODO: logging?
+        return false;
+    }
+    return true;
 }
 
 int32_t Player::repeatCount() const

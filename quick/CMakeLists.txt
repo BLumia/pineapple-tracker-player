@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.19)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -9,8 +9,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 REQUIRED COMPONENTS Core Quick LinguistTools)
-find_package(Qt6 REQUIRED COMPONENTS Core Quick LinguistTools)
+find_package(QT NAMES Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 REQUIRED COMPONENTS Core Quick LinguistTools Qml)
 find_package(ECM 5.83.0 NO_MODULE)
 
 if(ECM_FOUND)
@@ -65,7 +65,7 @@ qt_add_resources(pineapple-tracker-player-quick resources.qrc
     FILES ../dist/pineapple-tracker-player.svg
 )
 
-target_link_libraries(pineapple-tracker-player-quick PRIVATE player-shared Qt::Quick)
+target_link_libraries(pineapple-tracker-player-quick PRIVATE player-shared Qt::Quick Qt::Qml)
 
 set_target_properties(pineapple-tracker-player-quick PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
@@ -74,6 +74,13 @@ set_target_properties(pineapple-tracker-player-quick PROPERTIES
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
 )
+
+qt_generate_deploy_qml_app_script(
+    TARGET pineapple-tracker-player-quick
+    OUTPUT_SCRIPT quick_deploy_script
+    NO_UNSUPPORTED_PLATFORM_ERROR
+)
+install(SCRIPT ${quick_deploy_script})
 
 install(TARGETS pineapple-tracker-player-quick
     BUNDLE DESTINATION .
