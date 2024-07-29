@@ -75,12 +75,12 @@ set_target_properties(pineapple-tracker-player-quick PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-qt_generate_deploy_qml_app_script(
-    TARGET pineapple-tracker-player-quick
-    OUTPUT_SCRIPT quick_deploy_script
-    NO_UNSUPPORTED_PLATFORM_ERROR
-)
-install(SCRIPT ${quick_deploy_script})
+# qt_generate_deploy_qml_app_script(
+#     TARGET pineapple-tracker-player-quick
+#     OUTPUT_SCRIPT quick_deploy_script
+#     NO_UNSUPPORTED_PLATFORM_ERROR
+# )
+# install(SCRIPT ${quick_deploy_script})
 
 install(TARGETS pineapple-tracker-player-quick
     BUNDLE DESTINATION .
