@@ -23,6 +23,10 @@ set(PROJECT_SOURCES
     instrumentsmodel.h instrumentsmodel.cpp
 )
 
+if (WIN32)
+    list(APPEND PROJECT_SOURCES "${PROJECT_SOURCE_DIR}/assets/pineapple-tracker-player.rc")
+endif()
+
 qt_add_executable(pineapple-tracker-player
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
