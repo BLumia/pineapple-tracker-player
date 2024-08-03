@@ -9,6 +9,9 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# This is optional. Arch Linux's portaudio package doesn't have CMake support (for now).
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+
 find_package(Qt6 REQUIRED COMPONENTS Core Gui)
 find_package(PortAudio REQUIRED)
 find_package(PkgConfig REQUIRED)
