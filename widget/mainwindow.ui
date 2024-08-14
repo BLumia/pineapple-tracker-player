@@ -33,14 +33,14 @@
      </widget>
     </item>
     <item>
-     <widget class="QSlider" name="horizontalSlider">
+     <widget class="QSlider" name="playbackSlider">
       <property name="orientation">
        <enum>Qt::Orientation::Horizontal</enum>
       </property>
      </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1,0">
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1,0,0">
       <item>
        <widget class="QPushButton" name="playButton">
         <property name="text">
@@ -62,7 +62,20 @@
        </spacer>
       </item>
       <item>
-       <widget class="QSlider" name="horizontalSlider_2">
+       <widget class="QPushButton" name="muteButton">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset theme="audio-volume-high"/>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="volumeSlider">
         <property name="minimumSize">
          <size>
           <width>90</width>
@@ -70,7 +83,7 @@
          </size>
         </property>
         <property name="minimum">
-         <number>-1500</number>
+         <number>-2000</number>
         </property>
         <property name="maximum">
          <number>1000</number>
@@ -109,9 +122,15 @@
         <property name="text">
          <string>Playlist</string>
         </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
         <property name="flat">
          <bool>true</bool>
         </property>
+        <attribute name="buttonGroup">
+         <string notr="true">buttonGroup</string>
+        </attribute>
        </widget>
       </item>
       <item>
@@ -119,9 +138,18 @@
         <property name="text">
          <string>Message</string>
         </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
         <property name="flat">
          <bool>true</bool>
         </property>
+        <attribute name="buttonGroup">
+         <string notr="true">buttonGroup</string>
+        </attribute>
        </widget>
       </item>
       <item>
@@ -129,9 +157,15 @@
         <property name="text">
          <string>Instruments</string>
         </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
         <property name="flat">
          <bool>true</bool>
         </property>
+        <attribute name="buttonGroup">
+         <string notr="true">buttonGroup</string>
+        </attribute>
        </widget>
       </item>
      </layout>
@@ -180,6 +214,16 @@
         </property>
         <item>
          <widget class="QListView" name="playlistView"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="filterEdit">
+          <property name="placeholderText">
+           <string>Type to filter by keyword</string>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -252,4 +296,7 @@
  </widget>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="buttonGroup"/>
+ </buttongroups>
 </ui>

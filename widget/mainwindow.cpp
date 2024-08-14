@@ -14,6 +14,7 @@
 #include <QListView>
 #include <QTime>
 #include <QMessageBox>
+#include <QSortFilterProxyModel>
 
 #include <portaudio.h>
 #include <libopenmpt/libopenmpt.hpp>
@@ -24,12 +25,14 @@ MainWindow::MainWindow(QWidget *parent)
     , m_player(new Player(this))
     , m_playlistManager(new PlaylistManager(this))
     , m_instrumentsModel(new InstrumentsModel(m_player, this))
+    , m_playlistFilderModel(new QSortFilterProxyModel(this))
 {
     ui->setupUi(this);
     ui->plainTextEdit->setFont(Util::defaultMonoFont());
     ui->instrumentsListView->setFont(Util::defaultMonoFont());
     ui->instrumentsListView->setModel(m_instrumentsModel);
-    ui->playlistView->setModel(m_playlistManager->model());
+    m_playlistFilderModel->setSourceModel(m_playlistManager->model());
+    ui->playlistView->setModel(m_playlistFilderModel);
     setWindowIcon(QIcon(":/icons/dist/pineapple-tracker-player.svg"));
 
     m_playlistManager->setAutoLoadFilterSuffixes({"*.xm", "*.it", "*.mod", "*.s3m", "*.mptm"});
@@ -43,8 +46,8 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
     connect(m_player, &Player::fileLoaded, this, [this](){
-        ui->horizontalSlider->setMaximum(m_player->totalOrders() - 1);
-        ui->horizontalSlider->setValue(m_player->currentOrder());
+        ui->playbackSlider->setMaximum(m_player->totalOrders() - 1);
+        ui->playbackSlider->setValue(m_player->currentOrder());
         ui->songTitle->setText(m_player->title());
         const QString & artist = m_player->artist();
         ui->label_4->setText(artist.isEmpty() ? m_player->tracker() : (m_player->artist() + " (" + m_player->tracker() + ")") );
@@ -58,8 +61,8 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
     connect(m_player, &Player::currentOrderChanged, this, [this](){
-        QSignalBlocker sb(ui->horizontalSlider);
-        ui->horizontalSlider->setValue(m_player->currentOrder());
+        QSignalBlocker sb(ui->playbackSlider);
+        ui->playbackSlider->setValue(m_player->currentOrder());
     });
 
     connect(m_player, &Player::currentRowChanged, this, [this](){
@@ -70,13 +73,30 @@ MainWindow::MainWindow(QWidget *parent)
                              ));
     });
 
-    connect(ui->horizontalSlider, &QSlider::valueChanged, this, [this](int value){
-        m_player->seek(ui->horizontalSlider->value());
+    connect(m_player, &Player::gainChanged, this, [this](){
+        // only update the icon of the mute button here.
+        int32_t gain = m_player->gain();
+        QString iconText;
+        if (gain < ui->volumeSlider->minimum()) {
+            // muted
+            iconText = "audio-volume-muted";
+        } else if (gain <= -1000) {
+            iconText = "audio-volume-low";
+        } else if (gain <= 0) {
+            iconText = "audio-volume-medium";
+        } else {
+            iconText = "audio-volume-high";
+        }
+        ui->muteButton->setIcon(QIcon::fromTheme(iconText));
+    });
+
+    connect(ui->playbackSlider, &QSlider::valueChanged, this, [this](int value){
+        m_player->seek(ui->playbackSlider->value());
         QToolTip::showText(QCursor::pos(), QString::number(value), nullptr);
     });
 
-    connect(ui->horizontalSlider_2, &QSlider::sliderMoved, this, [this](int value){
-        m_player->setGain(ui->horizontalSlider_2->value());
+    connect(ui->volumeSlider, &QSlider::sliderMoved, this, [this](int value){
+        m_player->setGain(ui->volumeSlider->value());
         QToolTip::showText(QCursor::pos(), QString("%1 dB").arg(value / 100.f), nullptr);
     });
 
@@ -149,8 +169,9 @@ void MainWindow::on_playlistBtn_clicked()
 
 void MainWindow::on_playlistView_activated(const QModelIndex &index)
 {
-    m_playlistManager->setCurrentIndex(index);
-    playFiles({m_playlistManager->urlByIndex(index)});
+    QModelIndex sourceIndex(m_playlistFilderModel->mapToSource(index));
+    m_playlistManager->setCurrentIndex(sourceIndex);
+    playFiles({m_playlistManager->urlByIndex(sourceIndex)});
 }
 
 
@@ -180,5 +201,24 @@ void MainWindow::on_actionAbout_triggered()
         );
     infoBox.setTextFormat(Qt::MarkdownText);
     infoBox.exec();
+}
+
+
+void MainWindow::on_filterEdit_textChanged(const QString &arg1)
+{
+    m_playlistFilderModel->setFilterFixedString(arg1);
+}
+
+
+void MainWindow::on_muteButton_clicked()
+{
+    if (QGuiApplication::queryKeyboardModifiers().testFlag(Qt::ShiftModifier)) {
+        m_player->setGain(0);
+        ui->volumeSlider->setValue(0);
+        return;
+    }
+
+    bool isMuted = m_player->gain() < ui->volumeSlider->minimum();
+    m_player->setGain(isMuted ? ui->volumeSlider->value() : std::numeric_limits<std::int32_t>::min());
 }
 
