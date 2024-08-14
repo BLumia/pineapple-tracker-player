@@ -40,11 +40,18 @@
      </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1,0,0">
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,1,0,0">
       <item>
        <widget class="QPushButton" name="playButton">
         <property name="text">
          <string>Play</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="playbackModeButton">
+        <property name="text">
+         <string>Repeat</string>
         </property>
        </widget>
       </item>
@@ -256,7 +263,7 @@
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>24</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

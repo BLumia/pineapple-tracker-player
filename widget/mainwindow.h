@@ -17,6 +17,17 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    enum RepeatMode {
+        DisableRepeat,
+        Repeat,
+        Replay,
+        FirstRepeatMode = DisableRepeat,
+        LastRepeatMode = Replay,
+    };
+    Q_ENUM(RepeatMode)
+
+    Q_PROPERTY(RepeatMode repeatMode MEMBER m_repeatMode NOTIFY repeatModeChanged)
+
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
@@ -26,6 +37,9 @@ protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dropEvent(QDropEvent *event) override;
 
+signals:
+    void repeatModeChanged(RepeatMode mode);
+
 private slots:
     void on_instrumentsBtn_clicked();
     void on_messageBtn_clicked();
@@ -34,6 +48,7 @@ private slots:
     void on_actionAbout_triggered();
     void on_filterEdit_textChanged(const QString &arg1);
     void on_muteButton_clicked();
+    void on_playbackModeButton_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -41,4 +56,5 @@ private:
     PlaylistManager * m_playlistManager = nullptr;
     InstrumentsModel * m_instrumentsModel = nullptr;
     QSortFilterProxyModel * m_playlistFilderModel = nullptr;
+    RepeatMode m_repeatMode = Repeat;
 };

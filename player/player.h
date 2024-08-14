@@ -41,6 +41,7 @@ public:
     Q_PROPERTY(int repeatCount READ repeatCount WRITE setRepeatCount NOTIFY repeatCountChanged)
     Q_PROPERTY(int gain READ gain WRITE setGain NOTIFY gainChanged)
     Q_PROPERTY(bool isPlaying READ isPlaying NOTIFY playbackStatusChanged)
+    Q_PROPERTY(bool restartAfterFinished MEMBER m_restartAfterFinished NOTIFY restartAfterFinishedChanged)
 
     Q_INVOKABLE bool load(const QUrl &filename);
     Q_INVOKABLE void play();
@@ -91,6 +92,7 @@ signals:
     void playbackStatusChanged(); // can be emitted even if it's not changed
     void repeatCountChanged();
     void gainChanged();
+    void restartAfterFinishedChanged();
 
 private:
     void updateCachedState();
@@ -103,5 +105,6 @@ private:
     CachedPlaybackState m_cachedState;
     PlaybackOptions m_options;
     bool m_isPlaying;
+    bool m_restartAfterFinished;
 };
 

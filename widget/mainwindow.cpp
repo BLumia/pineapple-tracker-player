@@ -90,6 +90,25 @@ MainWindow::MainWindow(QWidget *parent)
         ui->muteButton->setIcon(QIcon::fromTheme(iconText));
     });
 
+    connect(this, &MainWindow::repeatModeChanged, this, [this](RepeatMode mode){
+        switch (mode) {
+        case DisableRepeat:
+            m_player->setRepeatCount(1);
+            m_player->setProperty("restartAfterFinished", false);
+            ui->playbackModeButton->setText("Single");
+            break;
+        case Repeat:
+            m_player->setRepeatCount(0);
+            ui->playbackModeButton->setText("Repeat");
+            break;
+        case Replay:
+            m_player->setRepeatCount(1);
+            m_player->setProperty("restartAfterFinished", true);
+            ui->playbackModeButton->setText("Replay");
+            break;
+        }
+    });
+
     connect(ui->playbackSlider, &QSlider::valueChanged, this, [this](int value){
         m_player->seek(ui->playbackSlider->value());
         QToolTip::showText(QCursor::pos(), QString::number(value), nullptr);
@@ -220,5 +239,15 @@ void MainWindow::on_muteButton_clicked()
 
     bool isMuted = m_player->gain() < ui->volumeSlider->minimum();
     m_player->setGain(isMuted ? ui->volumeSlider->value() : std::numeric_limits<std::int32_t>::min());
+}
+
+
+void MainWindow::on_playbackModeButton_clicked()
+{
+    RepeatMode targetMode = FirstRepeatMode;
+    if (m_repeatMode != LastRepeatMode) {
+        targetMode = static_cast<RepeatMode>(m_repeatMode + 1);
+    }
+    setProperty("repeatMode", targetMode);
 }
 

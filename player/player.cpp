@@ -22,6 +22,7 @@ QDebug& operator<<(QDebug& out, const std::string& str)
 Player::Player(QObject *parent)
     : QObject{parent}
     , m_isPlaying(false)
+    , m_restartAfterFinished(false)
 {
     Pa_Initialize();
     setupAndStartStream();
@@ -92,9 +93,11 @@ int Player::streamCallback(const void *inputBuffer, void *outputBuffer, unsigned
             // api like get_current_order() will return as it rewinded to the beginning of the song
             // but read() will still return 0 frame and won't write to the buffer...
             seek(0);
-            m_isPlaying = false;
-            emit playbackStatusChanged();
-            emit endOfSongReached();
+            if (!m_restartAfterFinished) {
+                m_isPlaying = false;
+                emit playbackStatusChanged();
+                emit endOfSongReached();
+            }
         }
     } else {
         std::fill(buffer, buffer + numFrames * 2, 0);
