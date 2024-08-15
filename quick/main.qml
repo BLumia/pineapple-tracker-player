@@ -97,12 +97,19 @@ ApplicationWindow {
                         player.isPlaying ? player.pause() : player.play()
                     }
                 }
-                SpinBox {
-                    value: player.repeatCount
-                    from: 0
-                    to: 99
-                    onValueChanged: {
-                        player.repeatCount = value
+                Button {
+                    property bool replayMode: false
+                    text: replayMode ? qsTr("Replay") : qsTr("Repeat")
+                    onClicked: {
+                        replayMode = !replayMode
+                        if (replayMode) {
+                            // replay
+                            player.repeatCount = 1
+                            player.restartAfterFinished = true
+                        } else {
+                            // repeat
+                            player.repeatCount = 0
+                        }
                     }
                 }
 
@@ -111,7 +118,7 @@ ApplicationWindow {
                 }
                 Slider {
                     id: gainSlider
-                    from: -1500
+                    from: -2000
                     to: 1000
                     value: player.gain
                     onMoved: () => {

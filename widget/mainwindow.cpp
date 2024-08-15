@@ -57,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
     connect(m_player, &Player::playbackStatusChanged, this, [this](){
-        ui->playButton->setText(m_player->isPlaying() ? "Pause" : "Play");
+        ui->playButton->setText(m_player->isPlaying() ? tr("Pause") : tr("Play"));
     });
 
     connect(m_player, &Player::currentOrderChanged, this, [this](){
@@ -95,16 +95,19 @@ MainWindow::MainWindow(QWidget *parent)
         case DisableRepeat:
             m_player->setRepeatCount(1);
             m_player->setProperty("restartAfterFinished", false);
-            ui->playbackModeButton->setText("Single");
+            ui->playbackModeButton->setText(tr("Single", "Repeat is disabled, song will only play "
+                                                         "a single time and will then stopped."));
             break;
         case Repeat:
             m_player->setRepeatCount(0);
-            ui->playbackModeButton->setText("Repeat");
+            ui->playbackModeButton->setText(tr("Repeat"));
             break;
         case Replay:
             m_player->setRepeatCount(1);
             m_player->setProperty("restartAfterFinished", true);
-            ui->playbackModeButton->setText("Replay");
+            ui->playbackModeButton->setText(tr("Replay", "Similar to Repeat mode, but the playback "
+                                                         "is restarted from beginning instead of "
+                                                         "using the loop point in the module file."));
             break;
         }
     });

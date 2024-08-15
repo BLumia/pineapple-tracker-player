@@ -50,6 +50,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="playbackModeButton">
+        <property name="toolTip">
+         <string>Repeat Mode</string>
+        </property>
         <property name="text">
          <string>Repeat</string>
         </property>
@@ -263,7 +266,7 @@
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>20</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

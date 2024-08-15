@@ -32,6 +32,15 @@ qt_add_executable(pineapple-tracker-player
     ${PROJECT_SOURCES}
 )
 
+qt_add_translations(pineapple-tracker-player
+TS_FILES
+    ../quick/translations/pineapple-tracker-player.ts
+    ../quick/translations/pineapple-tracker-player_nl.ts
+    ../quick/translations/pineapple-tracker-player_pl.ts
+    ../quick/translations/pineapple-tracker-player_tr.ts
+    ../quick/translations/pineapple-tracker-player_zh_CN.ts
+)
+
 target_compile_definitions(pineapple-tracker-player PRIVATE
     PTPLAY_VERSION_STRING="${CMAKE_PROJECT_VERSION}"
 )
