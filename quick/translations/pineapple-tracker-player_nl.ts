@@ -6,102 +6,102 @@
     <message>
         <location filename="../../widget/mainwindow.ui" line="+17"/>
         <source>Pineapple Tracker Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Pineapple-speler</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Song Title (Drop file to load/play)</source>
-        <translation type="unfinished">Titel (sleep een bestand hierheen om af te spelen)</translation>
+        <translation>Titel (sleep een bestand hierheen om te laden/af te spelen)</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Artist (Tracker)</source>
-        <translation type="unfinished">Artiest (tracker)</translation>
+        <translation>Artiest (tracker)</translation>
     </message>
     <message>
         <location line="+16"/>
         <location filename="../../widget/mainwindow.cpp" line="+60"/>
         <source>Play</source>
-        <translation type="unfinished">Afspelen</translation>
+        <translation>Afspelen</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Repeat Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Herhaalmodus</translation>
     </message>
     <message>
         <location line="+3"/>
         <location filename="../../widget/mainwindow.cpp" line="+43"/>
         <source>Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Herhalen</translation>
     </message>
     <message>
         <location line="+56"/>
         <source>Playback Status</source>
-        <translation type="unfinished">Afspeelstatus</translation>
+        <translation>Afspeelstatus</translation>
     </message>
     <message>
         <location line="+20"/>
         <source>Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Afspeellijst</translation>
     </message>
     <message>
         <location line="+16"/>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Bericht</translation>
     </message>
     <message>
         <location line="+19"/>
         <source>Instruments</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrumenten</translation>
     </message>
     <message>
         <location line="+63"/>
         <source>Type to filter by keyword</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ om te filteren op trefwoord</translation>
     </message>
     <message>
         <location line="+43"/>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Bestand</translation>
+        <translation>&amp;Bestand</translation>
     </message>
     <message>
         <location line="+6"/>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hulp</translation>
     </message>
     <message>
         <location line="+12"/>
         <source>&amp;Open</source>
-        <translation type="unfinished">&amp;Openen</translation>
+        <translation>&amp;Openen</translation>
     </message>
     <message>
         <location line="+11"/>
         <location filename="../../widget/mainwindow.cpp" line="+101"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Over</translation>
     </message>
     <message>
         <location filename="../../widget/mainwindow.cpp" line="-144"/>
         <source>Pause</source>
-        <translation type="unfinished">Pauzeren</translation>
+        <translation>Pauzeren</translation>
     </message>
     <message>
         <location line="+38"/>
         <source>Single</source>
         <comment>Repeat is disabled, song will only play a single time and will then stopped.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Eenmalig</translation>
     </message>
     <message>
         <location line="+10"/>
         <source>Replay</source>
         <comment>Similar to Repeat mode, but the playback is restarted from beginning instead of using the loop point in the module file.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vanaf begin</translation>
     </message>
     <message>
         <location line="+102"/>
         <source>Based on the following free software libraries:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebaseerd op de volgende vrijesoftwarebibliotheken:</translation>
     </message>
 </context>
 <context>
@@ -140,7 +140,7 @@
         <location line="+9"/>
         <location filename="../../build/quick/player/main.qml" line="+9"/>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hulp</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -148,7 +148,7 @@
         <location filename="../../build/quick/player/main.qml" line="+3"/>
         <location line="+232"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Over</translation>
     </message>
     <message>
         <location line="-213"/>
@@ -177,12 +177,12 @@
     <message>
         <location line="+7"/>
         <source>Replay</source>
-        <translation type="unfinished"></translation>
+        <translation>Vanaf begin</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Herhalen</translation>
     </message>
     <message>
         <location line="+31"/>
