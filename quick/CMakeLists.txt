@@ -82,19 +82,6 @@ install(TARGETS pineapple-tracker-player-quick
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
-# install icon
-install (
-    FILES ../dist/pineapple-tracker-player.svg
-    DESTINATION "${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps"
-    RENAME pineapple-tracker-player.svg
-)
-
-# install shortcut
-install (
-    FILES ../dist/net.blumia.pineapple-tracker-player.desktop
-    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications"
-)
-
 if(QT_VERSION_MAJOR EQUAL 6)
 #    qt_import_qml_plugins(pineapple-tracker-player-quick) # do we really need this?
     qt_finalize_executable(pineapple-tracker-player-quick)

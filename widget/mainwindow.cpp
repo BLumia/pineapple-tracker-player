@@ -15,6 +15,7 @@
 #include <QTime>
 #include <QMessageBox>
 #include <QSortFilterProxyModel>
+#include <QStringBuilder>
 
 #include <portaudio.h>
 #include <libopenmpt/libopenmpt.hpp>

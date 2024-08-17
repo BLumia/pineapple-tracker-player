@@ -1,0 +1,41 @@
+name: Linux Package
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install build dept.
+        run: |
+          sudo apt update
+          sudo apt install cmake qt6-base-dev qt6-tools-dev qt6-declarative-dev portaudio19-dev libopenmpt-dev
+          # for linuxdeploy: https://github.com/AppImage/AppImageKit/wiki/FUSE
+          # linuxdeploy-plugin-qt still requires qmake currently: https://github.com/linuxdeploy/linuxdeploy-plugin-qt/issues/156
+          sudo add-apt-repository universe
+          sudo apt install libfuse2 qmake6
+      - name: Get linuxdeploy
+        run: |
+          wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+          wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage
+          chmod +x linuxdeploy-*.AppImage
+      - name: Build
+        working-directory: ./
+        run: |
+          cmake -B build .
+          cmake --build build -j
+      - name: Package
+        env:
+          QMAKE: /usr/bin/qmake6
+        run: |
+          ./linuxdeploy-x86_64.AppImage --appdir AppDir -e build/widget/pineapple-tracker-player -d dist/net.blumia.pineapple-tracker-player.desktop -i dist/pineapple-tracker-player.svg --icon-filename net.blumia.pineapple-tracker-player -p qt -o appimage
+          rm ./linuxdeploy*x86_64.AppImage
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: Linux-Build
+          path: "*.AppImage"
