@@ -20,7 +20,7 @@
     </message>
     <message>
         <location line="+16"/>
-        <location filename="../../widget/mainwindow.cpp" line="+60"/>
+        <location filename="../../widget/mainwindow.cpp" line="+61"/>
         <source>Play</source>
         <translation>Afspelen</translation>
     </message>
@@ -52,6 +52,11 @@
     </message>
     <message>
         <location line="+19"/>
+        <source>Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
         <source>Instruments</source>
         <translation>Instrumenten</translation>
     </message>
@@ -61,7 +66,7 @@
         <translation>Typ om te filteren op trefwoord</translation>
     </message>
     <message>
-        <location line="+43"/>
+        <location line="+50"/>
         <source>&amp;File</source>
         <translation>&amp;Bestand</translation>
     </message>
@@ -77,12 +82,12 @@
     </message>
     <message>
         <location line="+11"/>
-        <location filename="../../widget/mainwindow.cpp" line="+101"/>
+        <location filename="../../widget/mainwindow.cpp" line="+114"/>
         <source>About</source>
         <translation>Over</translation>
     </message>
     <message>
-        <location filename="../../widget/mainwindow.cpp" line="-144"/>
+        <location filename="../../widget/mainwindow.cpp" line="-157"/>
         <source>Pause</source>
         <translation>Pauzeren</translation>
     </message>
@@ -99,7 +104,7 @@
         <translation>Vanaf begin</translation>
     </message>
     <message>
-        <location line="+102"/>
+        <location line="+115"/>
         <source>Based on the following free software libraries:</source>
         <translation>Gebaseerd op de volgende vrijesoftwarebibliotheken:</translation>
     </message>
@@ -146,13 +151,13 @@
         <location line="+3"/>
         <location line="+239"/>
         <location filename="../../build/quick/player/main.qml" line="+3"/>
-        <location line="+232"/>
+        <location line="+239"/>
         <source>About</source>
         <translation>Over</translation>
     </message>
     <message>
         <location line="-213"/>
-        <location filename="../../build/quick/player/main.qml" line="-206"/>
+        <location filename="../../build/quick/player/main.qml" line="-213"/>
         <source>Song Title (Drop file to load/play)</source>
         <translation>Titel (sleep een bestand hierheen om af te spelen)</translation>
     </message>
@@ -176,11 +181,13 @@
     </message>
     <message>
         <location line="+7"/>
+        <location filename="../../build/quick/player/main.qml" line="+7"/>
         <source>Replay</source>
         <translation>Vanaf begin</translation>
     </message>
     <message>
         <location line="+0"/>
+        <location filename="../../build/quick/player/main.qml" line="+0"/>
         <source>Repeat</source>
         <translation>Herhalen</translation>
     </message>

@@ -21,6 +21,7 @@ set(PROJECT_SOURCES
     main.cpp
     mainwindow.h mainwindow.cpp mainwindow.ui
     instrumentsmodel.h instrumentsmodel.cpp
+    trackerwidget.h trackerwidget.cpp
 )
 
 if (WIN32)

@@ -43,6 +43,7 @@ signals:
 private slots:
     void on_instrumentsBtn_clicked();
     void on_messageBtn_clicked();
+    void on_trackerBtn_clicked();
     void on_playlistBtn_clicked();
     void on_playlistView_activated(const QModelIndex &index);
     void on_actionAbout_triggered();

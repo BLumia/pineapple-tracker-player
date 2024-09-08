@@ -136,6 +136,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->playButton, &QPushButton::clicked, this, [this](){
         m_player->isPlaying() ? m_player->pause() : m_player->play();
     });
+
+    ui->trackerWidget->bindablePatternContent().setBinding([&](){
+        // qDebug() << m_player->currentPattern();
+        return m_player->patternContent(QBindable<int>(m_player, "currentPattern").value());
+    });
+    ui->trackerWidget->bindableCurrentRow().setBinding([&](){
+        return QBindable<int>(m_player, "currentRow").value();
+    });
 }
 
 MainWindow::~MainWindow()
@@ -183,6 +191,11 @@ void MainWindow::on_instrumentsBtn_clicked()
 void MainWindow::on_messageBtn_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->messagePage);
+}
+
+void MainWindow::on_trackerBtn_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->trackerPage);
 }
 
 void MainWindow::on_playlistBtn_clicked()

@@ -163,6 +163,22 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="trackerBtn">
+        <property name="text">
+         <string>Pattern</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">buttonGroup</string>
+        </attribute>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="instrumentsBtn">
         <property name="text">
          <string>Instruments</string>
@@ -256,6 +272,16 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="trackerPage">
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="TrackerWidget" name="trackerWidget" native="true"/>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -304,6 +330,14 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TrackerWidget</class>
+   <extends>QWidget</extends>
+   <header>trackerwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
  <buttongroups>
