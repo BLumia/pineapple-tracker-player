@@ -53,7 +53,7 @@
     <message>
         <location line="+19"/>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Patroon</translation>
     </message>
     <message>
         <location line="+16"/>
