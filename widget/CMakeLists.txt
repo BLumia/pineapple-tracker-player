@@ -88,6 +88,12 @@ install (
     DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications"
 )
 
+# install app metadata file for appstream (and some other stuff using this metadata like snapcraft)
+install (
+    FILES ../dist/appstream/net.blumia.pineapple-tracker-player.metainfo.xml
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/metainfo"
+)
+
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(pineapple-tracker-player)
 endif()

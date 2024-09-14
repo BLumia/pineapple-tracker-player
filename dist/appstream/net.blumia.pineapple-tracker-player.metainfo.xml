@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop-application">
+  <id>net.blumia.pineapple-tracker-player</id>
+  <name>Pineapple Tracker Player</name>
+  <name xml:lang="zh-CN">菠萝模块音乐播放器</name>
+  <summary>Modular Music Player</summary>
+  <summary xml:lang="zh-CN">模块音乐播放器</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <developer_name>Gary (BLumia) Wang</developer_name>
+  <developer_name xml:lang="zh-CN">Gary (BLumia) Wang</developer_name>
+  <description>
+    <p>Pineapple Tracker Player is a Modular Music Player</p>
+    <p xml:lang="zh-CN">菠萝模块音乐播放器是一个模块音乐播放器</p>
+  </description>
+  <launchable type="desktop-id">net.blumia.pineapple-tracker-player.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Main window when modular files are loaded</caption>
+      <caption xml:lang="zh-CN">加载模块音乐后的主窗口</caption>
+      <image type="source" width="600" height="449">https://pineapple-tracker-player.sourceforge.io/ptp-gui-static.png</image>
+    </screenshot>
+  </screenshots>
+
+  <url type="homepage">https://github.com/BLumia/pineapple-tracker-player</url>
+  <url type="bugtracker">https://github.com/BLumia/pineapple-tracker-player/issues</url>
+  <provides>
+    <binary>pineapple-tracker-player</binary>
+  </provides>
+  <content_rating type="oars-1.1"/>
+</component>
