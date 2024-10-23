@@ -13,9 +13,7 @@ TrackerWidget::TrackerWidget(QWidget *parent)
 }
 
 TrackerWidget::~TrackerWidget()
-{
-
-}
+= default;
 
 void TrackerWidget::paintEvent(QPaintEvent *event)
 {
@@ -34,7 +32,7 @@ void TrackerWidget::paintEvent(QPaintEvent *event)
             const int offset = (i - curRow) * fontHeight;
             QStringList curRow(patternContent().at(i));
             std::transform(curRow.cbegin(), curRow.cend(), curRow.begin(),
-                           [](const QString from) -> const QString { return from.first(3); });
+                           [](const QString& from) -> QString { return from.first(3); });
             painter.drawText(0, centerY + offset, width(), fontHeight,
                              Qt::AlignCenter, curRow.join(QStringLiteral("  ")));
         }

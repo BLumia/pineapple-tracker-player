@@ -3,8 +3,8 @@
 #include "player.h"
 
 InstrumentsModel::InstrumentsModel(Player * player, QObject *parent)
-    : m_player(player)
-    , QStringListModel(parent)
+    : QStringListModel(parent)
+    , m_player(player)
 {
 
 }
@@ -39,7 +39,7 @@ bool InstrumentsModel::setData(const QModelIndex &index, const QVariant &value, 
 
 QVariant InstrumentsModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid()) return QVariant();
+    if (!index.isValid()) return {};
 
     if (role == Qt::CheckStateRole) return m_mutedInstruments.contains(index) ? Qt::Unchecked : Qt::Checked;
 

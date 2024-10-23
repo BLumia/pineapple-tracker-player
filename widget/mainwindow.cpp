@@ -26,14 +26,14 @@ MainWindow::MainWindow(QWidget *parent)
     , m_player(new Player(this))
     , m_playlistManager(new PlaylistManager(this))
     , m_instrumentsModel(new InstrumentsModel(m_player, this))
-    , m_playlistFilderModel(new QSortFilterProxyModel(this))
+    , m_playlistFilterModel(new QSortFilterProxyModel(this))
 {
     ui->setupUi(this);
     ui->plainTextEdit->setFont(Util::defaultMonoFont());
     ui->instrumentsListView->setFont(Util::defaultMonoFont());
     ui->instrumentsListView->setModel(m_instrumentsModel);
-    m_playlistFilderModel->setSourceModel(m_playlistManager->model());
-    ui->playlistView->setModel(m_playlistFilderModel);
+    m_playlistFilterModel->setSourceModel(m_playlistManager->model());
+    ui->playlistView->setModel(m_playlistFilterModel);
     setWindowIcon(QIcon(":/icons/dist/pineapple-tracker-player.svg"));
 
     m_playlistManager->setAutoLoadFilterSuffixes({"*.xm", "*.it", "*.mod", "*.s3m", "*.mptm"});
@@ -128,8 +128,7 @@ MainWindow::MainWindow(QWidget *parent)
                     this, "Select module file", {},
                     "Module Files (*.xm *.it *.mod *.s3m *.mptm)");
         if (url.isValid()) {
-            m_player->load(url);
-            m_player->play();
+            playFiles({url});
         }
     });
 
@@ -205,7 +204,7 @@ void MainWindow::on_playlistBtn_clicked()
 
 void MainWindow::on_playlistView_activated(const QModelIndex &index)
 {
-    QModelIndex sourceIndex(m_playlistFilderModel->mapToSource(index));
+    QModelIndex sourceIndex(m_playlistFilterModel->mapToSource(index));
     m_playlistManager->setCurrentIndex(sourceIndex);
     playFiles({m_playlistManager->urlByIndex(sourceIndex)});
 }
@@ -242,7 +241,7 @@ void MainWindow::on_actionAbout_triggered()
 
 void MainWindow::on_filterEdit_textChanged(const QString &arg1)
 {
-    m_playlistFilderModel->setFilterFixedString(arg1);
+    m_playlistFilterModel->setFilterFixedString(arg1);
 }
 
 

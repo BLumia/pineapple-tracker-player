@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 
     QTranslator translator;
     if (translator.load(QLocale(), QLatin1String("pineapple-tracker-player"), QLatin1String("_"), QLatin1String(":/i18n"))) {
-        app.installTranslator(&translator);
+        QApplication::installTranslator(&translator);
     }
 
     QCommandLineParser parser;
@@ -20,13 +20,13 @@ int main(int argc, char *argv[])
     parser.addHelpOption();
     parser.process(app);
 
-    QStringList urlStrList = parser.positionalArguments();
-    QList<QUrl> urlsToLoad = Util::convertToUrlList(urlStrList);
+    const QStringList urlStrList = parser.positionalArguments();
+    const QList<QUrl> urlsToLoad = Util::convertToUrlList(urlStrList);
 
     MainWindow w;
     w.show();
 
     w.playFiles(urlsToLoad);
 
-    return app.exec();
+    return QApplication::exec();
 }

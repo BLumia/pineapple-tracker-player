@@ -14,9 +14,9 @@ class TrackerWidget : public QWidget
 
 public:
     explicit TrackerWidget(QWidget *parent = nullptr);
-    ~TrackerWidget();
+    ~TrackerWidget() override;
 
-    QVector<QStringList> patternContent() { return m_patternContent.value(); }
+    QVector<QStringList> patternContent() const { return m_patternContent.value(); }
     void setPatternContent(const QVector<QStringList> & content) { m_patternContent = content; }
     QBindable<QVector<QStringList>> bindablePatternContent() { return &m_patternContent; }
 

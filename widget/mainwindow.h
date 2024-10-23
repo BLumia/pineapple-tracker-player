@@ -28,8 +28,8 @@ public:
 
     Q_PROPERTY(RepeatMode repeatMode MEMBER m_repeatMode NOTIFY repeatModeChanged)
 
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow() override;
 
     void playFiles(const QList<QUrl> &urls);
 
@@ -56,6 +56,6 @@ private:
     Player * m_player = nullptr;
     PlaylistManager * m_playlistManager = nullptr;
     InstrumentsModel * m_instrumentsModel = nullptr;
-    QSortFilterProxyModel * m_playlistFilderModel = nullptr;
+    QSortFilterProxyModel * m_playlistFilterModel = nullptr;
     RepeatMode m_repeatMode = Repeat;
 };
