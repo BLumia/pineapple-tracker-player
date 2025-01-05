@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.22)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -64,7 +64,7 @@ qt_add_resources(pineapple-tracker-player-quick resources.qrc
 target_link_libraries(pineapple-tracker-player-quick PRIVATE player-shared Qt::Quick Qt::Qml)
 
 set_target_properties(pineapple-tracker-player-quick PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
+    MACOSX_BUNDLE_GUI_IDENTIFIER net.blumia.pineapple-tracker-player-quick
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
