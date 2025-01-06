@@ -25,7 +25,7 @@
         <location filename="../main.qml" line="33"/>
         <location/>
         <source>Set Mono &amp;Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Nichtproportionale &amp;Schriftart festlegen</translation>
     </message>
     <message>
         <location filename="../main.qml" line="40"/>
