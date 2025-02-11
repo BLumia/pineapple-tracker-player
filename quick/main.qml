@@ -302,7 +302,7 @@ Based on the following free software libraries:
 
 [Source Code](https://github.com/BLumia/pineapple-tracker-player)
 
-Copyright &copy; 2024 [BLumia](https://github.com/BLumia/)
+Copyright &copy; 2025 [BLumia](https://github.com/BLumia/)
 `
                 onLinkActivated: function(link) {
                     Qt.openUrlExternally(link)

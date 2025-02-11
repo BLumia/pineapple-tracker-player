@@ -10,6 +10,8 @@
 #include <QIcon>
 #include <QTranslator>
 
+using namespace Qt::Literals::StringLiterals;
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -39,7 +41,7 @@ int main(int argc, char *argv[])
     ctx->setContextProperty("fileList", QVariant::fromValue(urlsToLoad));
     ctx->setContextProperty("monoFontFamily", Util::defaultMonoFontFamily());
 
-    const QUrl url(u"qrc:/player/main.qml"_qs);
+    const QUrl url(u"qrc:/player/main.qml"_s);
     engine.load(url);
 
     return app.exec();
