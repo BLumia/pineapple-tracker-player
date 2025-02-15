@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->plainTextEdit->setFont(Util::defaultMonoFont());
+    ui->playbackStatus->setFont(Util::defaultMonoFont());
     ui->instrumentsListView->setFont(Util::defaultMonoFont());
     ui->instrumentsListView->setModel(m_instrumentsModel);
     m_playlistFilterModel->setSourceModel(m_playlistManager->model());
