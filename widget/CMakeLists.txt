@@ -22,6 +22,7 @@ set(PROJECT_SOURCES
     mainwindow.h mainwindow.cpp mainwindow.ui
     instrumentsmodel.h instrumentsmodel.cpp
     trackerwidget.h trackerwidget.cpp
+    settings.h settings.cpp
     fileopeneventhandler.h fileopeneventhandler.cpp
 )
 

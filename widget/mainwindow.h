@@ -4,6 +4,7 @@
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
+class QMenu;
 class QDragEnterEvent;
 class QDropEvent;
 class QSortFilterProxyModel;
@@ -52,7 +53,10 @@ private slots:
     void on_playbackModeButton_clicked();
 
 private:
+    void generateThemeMenu();
+
     Ui::MainWindow *ui;
+    QMenu *m_themes;
     Player * m_player = nullptr;
     PlaylistManager * m_playlistManager = nullptr;
     InstrumentsModel * m_instrumentsModel = nullptr;

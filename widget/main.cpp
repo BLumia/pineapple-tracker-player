@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 #include "mainwindow.h"
+#include "settings.h"
 #include "util.h"
 
 #ifdef Q_OS_MACOS
@@ -30,6 +31,10 @@ int main(int argc, char *argv[])
 
     const QStringList urlStrList = parser.positionalArguments();
     const QList<QUrl> urlsToLoad = Util::convertToUrlList(urlStrList);
+
+    if (!Settings::instance()->applicationStyle().isEmpty()) {
+        qApp->setStyle(Settings::instance()->applicationStyle());
+    }
 
     MainWindow w;
     w.show();

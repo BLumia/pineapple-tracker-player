@@ -20,7 +20,7 @@
     </message>
     <message>
         <location line="+16"/>
-        <location filename="../../widget/mainwindow.cpp" line="+61"/>
+        <location filename="../../widget/mainwindow.cpp" line="+65"/>
         <source>Play</source>
         <translation type="unfinished"></translation>
     </message>
@@ -66,7 +66,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+53"/>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
@@ -76,18 +76,28 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+6"/>
+        <source>&amp;Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
         <source>&amp;Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+11"/>
-        <location filename="../../widget/mainwindow.cpp" line="+114"/>
+        <location filename="../../widget/mainwindow.cpp" line="+130"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widget/mainwindow.cpp" line="-157"/>
+        <location line="+5"/>
+        <source>Set Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widget/mainwindow.cpp" line="-173"/>
         <source>Pause</source>
         <translation type="unfinished"></translation>
     </message>
@@ -104,7 +114,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+115"/>
+        <location line="+131"/>
         <source>Based on the following free software libraries:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -113,99 +123,83 @@
     <name>main</name>
     <message>
         <location filename="../main.qml" line="+17"/>
-        <location filename="../../build/quick/player/main.qml" line="+17"/>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../build/quick/player/main.qml" line="+3"/>
         <source>&amp;Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+9"/>
-        <location filename="../../build/quick/player/main.qml" line="+9"/>
         <source>Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../build/quick/player/main.qml" line="+3"/>
         <source>Set Mono &amp;Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../build/quick/player/main.qml" line="+7"/>
         <source>Toggle &amp;Menu Bar Visibility</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+9"/>
-        <location filename="../../build/quick/player/main.qml" line="+9"/>
         <source>&amp;Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
         <location line="+239"/>
-        <location filename="../../build/quick/player/main.qml" line="+3"/>
-        <location line="+239"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-213"/>
-        <location filename="../../build/quick/player/main.qml" line="-213"/>
         <source>Song Title (Drop file to load/play)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../../build/quick/player/main.qml" line="+4"/>
         <source>Artist (Tracker)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../../build/quick/player/main.qml" line="+14"/>
         <source>Pause</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
-        <location filename="../../build/quick/player/main.qml" line="+0"/>
         <source>Play</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../build/quick/player/main.qml" line="+7"/>
         <source>Replay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
-        <location filename="../../build/quick/player/main.qml" line="+0"/>
         <source>Repeat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+31"/>
-        <location filename="../../build/quick/player/main.qml" line="+31"/>
         <source>Playback Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+138"/>
-        <location filename="../../build/quick/player/main.qml" line="+138"/>
         <source>Select module file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widget/main.cpp" line="+19"/>
-        <location filename="../main.cpp" line="+25"/>
+        <location filename="../../widget/main.cpp" line="+27"/>
+        <location filename="../main.cpp" line="+27"/>
         <source>File list.</source>
         <translation type="unfinished"></translation>
     </message>

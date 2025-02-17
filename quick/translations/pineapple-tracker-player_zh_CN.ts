@@ -20,7 +20,7 @@
     </message>
     <message>
         <location line="+16"/>
-        <location filename="../../widget/mainwindow.cpp" line="+61"/>
+        <location filename="../../widget/mainwindow.cpp" line="+65"/>
         <source>Play</source>
         <translation>播放</translation>
     </message>
@@ -66,7 +66,7 @@
         <translation>键入以根据关键词过滤</translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+53"/>
         <source>&amp;File</source>
         <translation>文件(&amp;F)</translation>
     </message>
@@ -76,18 +76,28 @@
         <translation>帮助(&amp;H)</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+6"/>
+        <source>&amp;Options</source>
+        <translation>选项(&amp;O)</translation>
+    </message>
+    <message>
+        <location line="+13"/>
         <source>&amp;Open</source>
         <translation>打开(&amp;O)</translation>
     </message>
     <message>
         <location line="+11"/>
-        <location filename="../../widget/mainwindow.cpp" line="+114"/>
+        <location filename="../../widget/mainwindow.cpp" line="+130"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../../widget/mainwindow.cpp" line="-157"/>
+        <location line="+5"/>
+        <source>Set Theme</source>
+        <translation>设置主题</translation>
+    </message>
+    <message>
+        <location filename="../../widget/mainwindow.cpp" line="-173"/>
         <source>Pause</source>
         <translation>暂停</translation>
     </message>
@@ -104,7 +114,7 @@
         <translation>重放</translation>
     </message>
     <message>
-        <location line="+115"/>
+        <location line="+131"/>
         <source>Based on the following free software libraries:</source>
         <translation>基于下列自由软件库：</translation>
     </message>
@@ -113,99 +123,83 @@
     <name>main</name>
     <message>
         <location filename="../main.qml" line="+17"/>
-        <location filename="../../build/quick/player/main.qml" line="+17"/>
         <source>&amp;File</source>
         <translation>文件(&amp;F)</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../build/quick/player/main.qml" line="+3"/>
         <source>&amp;Open</source>
         <translation>打开(&amp;O)</translation>
     </message>
     <message>
         <location line="+9"/>
-        <location filename="../../build/quick/player/main.qml" line="+9"/>
         <source>Options</source>
         <translation>选项</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../build/quick/player/main.qml" line="+3"/>
         <source>Set Mono &amp;Font</source>
         <translation>设置等宽字体(&amp;F)</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../build/quick/player/main.qml" line="+7"/>
         <source>Toggle &amp;Menu Bar Visibility</source>
         <translation>切换菜单栏可见性(&amp;M)</translation>
     </message>
     <message>
         <location line="+9"/>
-        <location filename="../../build/quick/player/main.qml" line="+9"/>
         <source>&amp;Help</source>
         <translation>帮助(&amp;H)</translation>
     </message>
     <message>
         <location line="+3"/>
         <location line="+239"/>
-        <location filename="../../build/quick/player/main.qml" line="+3"/>
-        <location line="+239"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
         <location line="-213"/>
-        <location filename="../../build/quick/player/main.qml" line="-213"/>
         <source>Song Title (Drop file to load/play)</source>
         <translation>曲目标题 (拖拽文件以加载并播放)</translation>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../../build/quick/player/main.qml" line="+4"/>
         <source>Artist (Tracker)</source>
         <translation>艺术家 (Tracker)</translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../../build/quick/player/main.qml" line="+14"/>
         <source>Pause</source>
         <translation>暂停</translation>
     </message>
     <message>
         <location line="+0"/>
-        <location filename="../../build/quick/player/main.qml" line="+0"/>
         <source>Play</source>
         <translation>播放</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../build/quick/player/main.qml" line="+7"/>
         <source>Replay</source>
         <translation>重放</translation>
     </message>
     <message>
         <location line="+0"/>
-        <location filename="../../build/quick/player/main.qml" line="+0"/>
         <source>Repeat</source>
         <translation>循环</translation>
     </message>
     <message>
         <location line="+31"/>
-        <location filename="../../build/quick/player/main.qml" line="+31"/>
         <source>Playback Status</source>
         <translation>回放状态</translation>
     </message>
     <message>
         <location line="+138"/>
-        <location filename="../../build/quick/player/main.qml" line="+138"/>
         <source>Select module file</source>
         <translation>选择模块文件</translation>
     </message>
     <message>
-        <location filename="../../widget/main.cpp" line="+19"/>
-        <location filename="../main.cpp" line="+25"/>
+        <location filename="../../widget/main.cpp" line="+27"/>
+        <location filename="../main.cpp" line="+27"/>
         <source>File list.</source>
         <translation>文件列表。</translation>
     </message>

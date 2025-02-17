@@ -4,6 +4,7 @@
 #include "player.h"
 #include "util.h"
 #include "playlistmanager.h"
+#include "settings.h"
 
 #include "instrumentsmodel.h"
 
@@ -16,6 +17,7 @@
 #include <QMessageBox>
 #include <QSortFilterProxyModel>
 #include <QStringBuilder>
+#include <QStyleFactory>
 
 #include <portaudio.h>
 #include <libopenmpt/libopenmpt.hpp>
@@ -36,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_playlistFilterModel->setSourceModel(m_playlistManager->model());
     ui->playlistView->setModel(m_playlistFilterModel);
     setWindowIcon(QIcon(":/icons/dist/pineapple-tracker-player.svg"));
+    generateThemeMenu();
 
     m_playlistManager->setAutoLoadFilterSuffixes({"*.xm", "*.it", "*.mod", "*.s3m", "*.mptm"});
 
@@ -183,6 +186,23 @@ void MainWindow::dropEvent(QDropEvent *event)
     }
 }
 
+void MainWindow::generateThemeMenu()
+{
+    m_themes = new QMenu();
+    ui->actionSetTheme->setMenu(m_themes);
+
+    const QStringList & themes = QStyleFactory::keys();
+    for (const QString & theme : themes) {
+        QAction * entry = m_themes->addAction(theme);
+        entry->setData(theme);
+        connect(entry, &QAction::triggered, this, [this](){
+            QAction * action = qobject_cast<QAction*>(QObject::sender());
+            qApp->setStyle(action->data().toString());
+            Settings::instance()->setApplicationStyle(action->data().toString());
+        });
+    }
+}
+
 void MainWindow::on_instrumentsBtn_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->instrumentsPage);
@@ -267,4 +287,3 @@ void MainWindow::on_playbackModeButton_clicked()
     }
     setProperty("repeatMode", targetMode);
 }
-
