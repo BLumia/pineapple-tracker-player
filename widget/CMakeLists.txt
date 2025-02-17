@@ -22,6 +22,7 @@ set(PROJECT_SOURCES
     mainwindow.h mainwindow.cpp mainwindow.ui
     instrumentsmodel.h instrumentsmodel.cpp
     trackerwidget.h trackerwidget.cpp
+    fileopeneventhandler.h fileopeneventhandler.cpp
 )
 
 if (WIN32)
@@ -68,6 +69,8 @@ set_target_properties(pineapple-tracker-player PROPERTIES
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
+    MACOSX_BUNDLE_BUNDLE_NAME "Pineapple Tracker Player"
+    MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/../dist/MacOSXBundleInfo.plist.in
     WIN32_EXECUTABLE TRUE
 )
 
