@@ -237,6 +237,9 @@ void MainWindow::on_actionAbout_triggered()
     infoBox.setIcon(QMessageBox::Information);
     infoBox.setWindowTitle(tr("About"));
     infoBox.setStandardButtons(QMessageBox::Ok);
+#if defined(Q_OS_MACOS) && QT_VERSION >= QT_VERSION_CHECK(6, 6, 0)
+    infoBox.setOption(QMessageBox::Option::DontUseNativeDialog);
+#endif // Q_OS_MACOS
     std::uint32_t libopenmptver = openmpt::get_library_version();
     infoBox.setText(
         "Pineapple Tracker Player " PTPLAY_VERSION_STRING
