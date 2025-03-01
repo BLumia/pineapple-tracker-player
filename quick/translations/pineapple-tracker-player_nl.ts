@@ -78,7 +78,7 @@
     <message>
         <location line="+6"/>
         <source>&amp;Options</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Opties</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -94,7 +94,7 @@
     <message>
         <location line="+5"/>
         <source>Set Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Thema instellen</translation>
     </message>
     <message>
         <location filename="../../widget/mainwindow.cpp" line="-173"/>
