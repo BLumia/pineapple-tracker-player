@@ -12,6 +12,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt6 6.5.0 REQUIRED COMPONENTS Widgets)
 find_package(ECM 5.83.0 NO_MODULE)
 
+include(GNUInstallDirs)
+
 if(ECM_FOUND)
     set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
     include(ECMAddAppIcon)
