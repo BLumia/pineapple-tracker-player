@@ -5,6 +5,7 @@
 #include <QDebug>
 
 #include <fstream>
+#include <memory>
 
 #include <libopenmpt/libopenmpt.hpp>
 #include <libopenmpt/libopenmpt_ext.hpp>
@@ -41,6 +42,7 @@ bool Player::load(const QUrl &filename)
         return false;
     }
     QByteArray data(file.readAll());
+    std::unique_ptr<openmpt::module_ext> oldModuleDeleter(m_module);
     try {
         // not using ifstream here since it might cause filename encoding issue
         m_module = new openmpt::module_ext(data.data(), data.size());
@@ -56,6 +58,7 @@ bool Player::load(const QUrl &filename)
 
     emit fileLoaded();
     emit currentPatternChanged();
+    emit currentRowChanged();
     emit totalOrdersChanged();
 
     return true;
