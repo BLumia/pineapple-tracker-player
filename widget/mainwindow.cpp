@@ -51,8 +51,8 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
     connect(m_player, &Player::fileLoaded, this, [this](){
-        ui->playbackSlider->setMaximum(m_player->totalOrders() - 1);
         ui->playbackSlider->setValue(m_player->currentOrder());
+        ui->playbackSlider->setMaximum(m_player->totalOrders() - 1);
         ui->songTitle->setText(m_player->title());
         const QString & artist = m_player->artist();
         ui->label_4->setText(artist.isEmpty() ? m_player->tracker() : (m_player->artist() + " (" + m_player->tracker() + ")") );
