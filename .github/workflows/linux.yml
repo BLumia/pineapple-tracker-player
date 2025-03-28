@@ -6,7 +6,7 @@ jobs:
   build:
     strategy:
       matrix:
-        qt_ver: ['6.7.2']
+        qt_ver: ['6.8.3']
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
