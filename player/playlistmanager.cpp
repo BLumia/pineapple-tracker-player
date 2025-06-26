@@ -16,7 +16,7 @@ PlaylistModel::PlaylistModel(QObject *parent)
 }
 
 PlaylistModel::~PlaylistModel()
-= default;
+    = default;
 
 void PlaylistModel::setPlaylist(const QList<QUrl> &urls)
 {
@@ -186,6 +186,26 @@ QModelIndex PlaylistManager::loadPlaylist(const QUrl &url)
     return idx;
 }
 
+QModelIndex PlaylistManager::loadM3U8Playlist(const QUrl &url)
+{
+    QFile file(url.toLocalFile());
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QList<QUrl> urls;
+        while (!file.atEnd()) {
+            QString line = file.readLine();
+            if (line.startsWith('#')) {
+                continue;
+            }
+            QFileInfo fileInfo(file);
+            QUrl item = QUrl::fromUserInput(line, fileInfo.absolutePath());
+            urls.append(item);
+        }
+        return loadPlaylist(urls);
+    } else {
+        return {};
+    }
+}
+
 int PlaylistManager::totalCount() const
 {
     return m_model.rowCount();
@@ -196,7 +216,7 @@ QModelIndex PlaylistManager::previousIndex() const
     int count = totalCount();
     if (count == 0) return {};
 
-    return m_model.index(m_currentIndex - 1 < 0 ? count - 1 : m_currentIndex - 1);
+    return m_model.index(isFirstIndex() ? count - 1 : m_currentIndex - 1);
 }
 
 QModelIndex PlaylistManager::nextIndex() const
@@ -204,12 +224,22 @@ QModelIndex PlaylistManager::nextIndex() const
     int count = totalCount();
     if (count == 0) return {};
 
-    return m_model.index(m_currentIndex + 1 == count ? 0 : m_currentIndex + 1);
+    return m_model.index(isLastIndex() ? 0 : m_currentIndex + 1);
 }
 
 QModelIndex PlaylistManager::curIndex() const
 {
     return m_model.index(m_currentIndex);
+}
+
+bool PlaylistManager::isFirstIndex() const
+{
+    return m_currentIndex == 0;
+}
+
+bool PlaylistManager::isLastIndex() const
+{
+    return m_currentIndex + 1 == totalCount();
 }
 
 void PlaylistManager::setCurrentIndex(const QModelIndex &index)

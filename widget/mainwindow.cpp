@@ -128,11 +128,11 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
     connect(ui->actionOpen, &QAction::triggered, this, [this](){
-        const QUrl & url = QFileDialog::getOpenFileUrl(
-                    this, "Select module file", {},
-                    "Module Files (*.xm *.it *.mod *.s3m *.mptm)");
-        if (url.isValid()) {
-            playFiles({url});
+        const QList<QUrl> & urls = QFileDialog::getOpenFileUrls(
+                    this, "Select module file or playlist", {},
+                    "Module Files (*.xm *.it *.mod *.s3m *.mptm);;M3U8 Playlist for Module Files (*.m3u8 *.m3u)");
+        if (!urls.isEmpty()) {
+            playFiles(urls);
         }
     });
 
@@ -158,8 +158,23 @@ void MainWindow::playFiles(const QList<QUrl> &urls)
 {
     if (urls.size() <= 0) return;
 
+    const QUrl & firstUrl = urls.first();
+    if (urls.count() == 1) {
+        const QString lowerCaseUrlPath(firstUrl.path().toLower());
+        if (lowerCaseUrlPath.endsWith(".m3u8") || lowerCaseUrlPath.endsWith(".m3u")) {
+            m_playlistManager->loadM3U8Playlist(firstUrl);
+            playFile(m_playlistManager->model()->urlByIndex(0));
+            return;
+        }
+    }
+
     m_playlistManager->loadPlaylist(urls);
-    m_player->load(urls.first());
+    playFile(urls.first());
+}
+
+void MainWindow::playFile(const QUrl &url)
+{
+    m_player->load(url);
     m_player->play();
 }
 
@@ -227,7 +242,7 @@ void MainWindow::on_playlistView_activated(const QModelIndex &index)
 {
     QModelIndex sourceIndex(m_playlistFilterModel->mapToSource(index));
     m_playlistManager->setCurrentIndex(sourceIndex);
-    playFiles({m_playlistManager->urlByIndex(sourceIndex)});
+    playFile(m_playlistManager->urlByIndex(sourceIndex));
 }
 
 

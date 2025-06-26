@@ -33,6 +33,7 @@ public:
     ~MainWindow() override;
 
     void playFiles(const QList<QUrl> &urls);
+    void playFile(const QUrl &url);
 
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;

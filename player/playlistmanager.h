@@ -61,11 +61,14 @@ public:
     void setPlaylist(const QList<QUrl> & url);
     Q_INVOKABLE QModelIndex loadPlaylist(const QList<QUrl> & urls);
     Q_INVOKABLE QModelIndex loadPlaylist(const QUrl & url);
+    Q_INVOKABLE QModelIndex loadM3U8Playlist(const QUrl & url);
 
     int totalCount() const;
     QModelIndex previousIndex() const;
     QModelIndex nextIndex() const;
     QModelIndex curIndex() const;
+    bool isFirstIndex() const;
+    bool isLastIndex() const;
     void setCurrentIndex(const QModelIndex & index);
     QUrl urlByIndex(const QModelIndex & index);
     QString localFileByIndex(const QModelIndex & index);
