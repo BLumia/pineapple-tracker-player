@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Audio;AudioVideo;Player;
 Comment=Pineapple Tracker Player is a modular music player
-Comment[zh_CN]=菠萝トラッカー播放器是一个模块音乐播放器
+Comment[zh_CN]=菠萝模块音乐播放器是一个模块音乐播放器
 Exec=pineapple-tracker-player %F
 GenericName=Modular Music Player
 GenericName[zh_CN]=模块音乐播放器
@@ -9,7 +9,7 @@ Icon=net.blumia.pineapple-tracker-player
 Keywords=OpenMPT;XM;
 MimeType=audio/x-xm;audio/x-mod;audio/x-it;audio/x-s3m;
 Name=Pineapple Tracker Player
-Name[zh_CN]=菠萝トラッカー播放器
+Name[zh_CN]=菠萝模块音乐播放器
 StartupNotify=false
 Type=Application
 Terminal=false
