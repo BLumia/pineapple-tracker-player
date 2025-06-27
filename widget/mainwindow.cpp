@@ -70,9 +70,7 @@ MainWindow::MainWindow(QWidget *parent)
             const QModelIndex idx(m_playlistManager->nextIndex());
             if (idx.isValid()) {
                 m_playlistManager->setCurrentIndex(idx);
-                if (ui->playlistView->selectionModel()->selectedIndexes().isEmpty()) {
-                    ui->playlistView->selectionModel()->select(idx, QItemSelectionModel::Select);
-                }
+                ui->playlistView->selectionModel()->select(idx, QItemSelectionModel::SelectCurrent);
                 ui->playlistView->scrollTo(idx);
                 playFile(m_playlistManager->urlByIndex(idx));
             }
