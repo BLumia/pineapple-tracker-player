@@ -65,6 +65,20 @@ MainWindow::MainWindow(QWidget *parent)
         ui->playButton->setText(m_player->isPlaying() ? tr("Pause") : tr("Play"));
     });
 
+    connect(m_player, &Player::endOfSongReached, this, [this](){
+        if (m_repeatMode == Playlist && !m_player->isPlaying()) {
+            const QModelIndex idx(m_playlistManager->nextIndex());
+            if (idx.isValid()) {
+                m_playlistManager->setCurrentIndex(idx);
+                if (ui->playlistView->selectionModel()->selectedIndexes().isEmpty()) {
+                    ui->playlistView->selectionModel()->select(idx, QItemSelectionModel::Select);
+                }
+                ui->playlistView->scrollTo(idx);
+                playFile(m_playlistManager->urlByIndex(idx));
+            }
+        }
+    });
+
     connect(m_player, &Player::currentOrderChanged, this, [this](){
         QSignalBlocker sb(ui->playbackSlider);
         ui->playbackSlider->setValue(m_player->currentOrder());
@@ -113,6 +127,12 @@ MainWindow::MainWindow(QWidget *parent)
             ui->playbackModeButton->setText(tr("Replay", "Similar to Repeat mode, but the playback "
                                                          "is restarted from beginning instead of "
                                                          "using the loop point in the module file."));
+            break;
+        case Playlist:
+            m_player->setRepeatCount(1);
+            m_player->setProperty("restartAfterFinished", false);
+            ui->playbackModeButton->setText(tr("Playlist", "Once finished, play the next song in "
+                                                           "the playlist."));
             break;
         }
     });

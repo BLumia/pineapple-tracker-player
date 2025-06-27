@@ -22,8 +22,9 @@ public:
         DisableRepeat,
         Repeat,
         Replay,
+        Playlist,
         FirstRepeatMode = DisableRepeat,
-        LastRepeatMode = Replay,
+        LastRepeatMode = Playlist,
     };
     Q_ENUM(RepeatMode)
 
