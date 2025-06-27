@@ -31,7 +31,7 @@
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../widget/mainwindow.cpp" line="+43"/>
+        <location filename="../../widget/mainwindow.cpp" line="+53"/>
         <source>Repeat</source>
         <translation>Herhalen</translation>
     </message>
@@ -87,22 +87,22 @@
     </message>
     <message>
         <location line="+11"/>
-        <location filename="../../widget/mainwindow.cpp" line="+130"/>
+        <location filename="../../widget/mainwindow.cpp" line="+151"/>
         <source>About</source>
         <translation>Over</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+8"/>
         <source>Set Theme</source>
         <translation>Thema instellen</translation>
     </message>
     <message>
-        <location filename="../../widget/mainwindow.cpp" line="-173"/>
+        <location filename="../../widget/mainwindow.cpp" line="-204"/>
         <source>Pause</source>
         <translation>Pauzeren</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+48"/>
         <source>Single</source>
         <comment>Repeat is disabled, song will only play a single time and will then stopped.</comment>
         <translation>Eenmalig</translation>
@@ -114,7 +114,13 @@
         <translation>Vanaf begin</translation>
     </message>
     <message>
-        <location line="+131"/>
+        <location line="+7"/>
+        <source>Playlist</source>
+        <comment>Once finished, play the next song in the playlist.</comment>
+        <translation type="unfinished">Afspeellijst</translation>
+    </message>
+    <message>
+        <location line="+148"/>
         <source>Based on the following free software libraries:</source>
         <translation>Gebaseerd op de volgende vrijesoftwarebibliotheken:</translation>
     </message>
@@ -198,7 +204,7 @@
         <translation>Kies een modulebestand</translation>
     </message>
     <message>
-        <location filename="../../widget/main.cpp" line="+27"/>
+        <location filename="../../widget/main.cpp" line="+28"/>
         <location filename="../main.cpp" line="+27"/>
         <source>File list.</source>
         <translation>Bestandslĳst.</translation>
