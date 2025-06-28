@@ -117,7 +117,7 @@
         <location line="+7"/>
         <source>Playlist</source>
         <comment>Once finished, play the next song in the playlist.</comment>
-        <translation type="unfinished">Afspeellijst</translation>
+        <translation>Afspeellijst</translation>
     </message>
     <message>
         <location line="+148"/>
