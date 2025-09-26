@@ -11,7 +11,7 @@
     <message>
         <location line="+7"/>
         <source>Song Title (Drop file to load/play)</source>
-        <translation type="unfinished">Şarkı Başlığı (Yüklemek/oynatmak için dosyayı bırakın)</translation>
+        <translation>Şarkı Başlığı (Yüklemek/oynatmak için dosyayı bırakın)</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -22,33 +22,33 @@
         <location line="+16"/>
         <location filename="../../widget/mainwindow.cpp" line="+65"/>
         <source>Play</source>
-        <translation type="unfinished">Oynat</translation>
+        <translation>Oynat</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Repeat Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Yineleme Modu</translation>
     </message>
     <message>
         <location line="+3"/>
         <location filename="../../widget/mainwindow.cpp" line="+53"/>
         <source>Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Yinele</translation>
     </message>
     <message>
         <location line="+56"/>
         <source>Playback Status</source>
-        <translation type="unfinished">Oynatma Durumu</translation>
+        <translation>Oynatma Durumu</translation>
     </message>
     <message>
         <location line="+20"/>
         <source>Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Oynatma Listesi</translation>
     </message>
     <message>
         <location line="+16"/>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>İleti</translation>
     </message>
     <message>
         <location line="+19"/>
