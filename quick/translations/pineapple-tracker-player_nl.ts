@@ -122,7 +122,7 @@
     <message>
         <location line="+148"/>
         <source>Based on the following free software libraries:</source>
-        <translation>Gebaseerd op de volgende vrijesoftwarebibliotheken:</translation>
+        <translation>Gebaseerd op deze vrijesoftwarebibliotheken:</translation>
     </message>
 </context>
 <context>
@@ -207,7 +207,7 @@
         <location filename="../../widget/main.cpp" line="+28"/>
         <location filename="../main.cpp" line="+27"/>
         <source>File list.</source>
-        <translation>Bestandslĳst.</translation>
+        <translation>Bestandslijst.</translation>
     </message>
 </context>
 </TS>
