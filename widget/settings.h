@@ -17,6 +17,18 @@ public:
 
     void setApplicationStyle(const QString & styleName);
 
+    int volume() const;
+    void setVolume(int volume);
+
+    int audioDeviceIndex() const;
+    void setAudioDeviceIndex(int index);
+
+    int audioSampleRate() const;
+    void setAudioSampleRate(int sampleRate);
+
+    int audioFramesPerBuffer() const;
+    void setAudioFramesPerBuffer(int framesPerBuffer);
+
 private:
     Settings();
 
@@ -28,4 +40,3 @@ signals:
 
 public slots:
 };
-

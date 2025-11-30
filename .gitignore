@@ -2,3 +2,9 @@
 .vscode/
 *.user
 .DS_Store
+
+.idea/
+.qtcreator/
+
+# Clangd cache
+.cache/

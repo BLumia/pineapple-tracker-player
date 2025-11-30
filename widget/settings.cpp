@@ -31,6 +31,50 @@ void Settings::setApplicationStyle(const QString &styleName)
     m_qsettings->sync();
 }
 
+int Settings::volume() const
+{
+    return m_qsettings->value("volume", 0).toInt();
+}
+
+void Settings::setVolume(int volume)
+{
+    m_qsettings->setValue("volume", volume);
+    m_qsettings->sync();
+}
+
+int Settings::audioDeviceIndex() const
+{
+    return m_qsettings->value("audio_device_index", -1).toInt();
+}
+
+void Settings::setAudioDeviceIndex(int index)
+{
+    m_qsettings->setValue("audio_device_index", index);
+    m_qsettings->sync();
+}
+
+int Settings::audioSampleRate() const
+{
+    return m_qsettings->value("audio_sample_rate", 44100).toInt();
+}
+
+void Settings::setAudioSampleRate(int sampleRate)
+{
+    m_qsettings->setValue("audio_sample_rate", sampleRate);
+    m_qsettings->sync();
+}
+
+int Settings::audioFramesPerBuffer() const
+{
+    return m_qsettings->value("audio_frames_per_buffer", 0).toInt();
+}
+
+void Settings::setAudioFramesPerBuffer(int framesPerBuffer)
+{
+    m_qsettings->setValue("audio_frames_per_buffer", framesPerBuffer);
+    m_qsettings->sync();
+}
+
 #if defined(FLAG_PORTABLE_MODE_SUPPORT) && defined(Q_OS_WIN)
 #include <windows.h>
 // QCoreApplication::applicationDirPath() parses the "applicationDirPath" from arg0, which...
@@ -70,4 +114,3 @@ Settings::Settings()
 
     m_qsettings = new QSettings(QDir(configPath).absoluteFilePath("config.ini"), QSettings::IniFormat, this);
 }
-

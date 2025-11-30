@@ -5,6 +5,7 @@
 #include "util.h"
 #include "playlistmanager.h"
 #include "settings.h"
+#include "audiosettingsdialog.h"
 
 #include "instrumentsmodel.h"
 
@@ -39,6 +40,17 @@ MainWindow::MainWindow(QWidget *parent)
     ui->playlistView->setModel(m_playlistFilterModel);
     setWindowIcon(QIcon(":/icons/dist/pineapple-tracker-player.svg"));
     generateThemeMenu();
+
+    // Initialize Audio Settings
+    Player::AudioSettings audioSettings;
+    audioSettings.deviceIndex = Settings::instance()->audioDeviceIndex();
+    audioSettings.sampleRate = Settings::instance()->audioSampleRate();
+    audioSettings.framesPerBuffer = Settings::instance()->audioFramesPerBuffer();
+    m_player->applyAudioSettings(audioSettings);
+
+    m_player->setGain(Settings::instance()->volume());
+    ui->volumeSlider->setValue(Settings::instance()->volume());
+    updateVolumeIcon();
 
     m_playlistManager->setAutoLoadFilterSuffixes({"*.xm", "*.it", "*.mod", "*.s3m", "*.mptm"});
 
@@ -90,22 +102,7 @@ MainWindow::MainWindow(QWidget *parent)
                              ));
     });
 
-    connect(m_player, &Player::gainChanged, this, [this](){
-        // only update the icon of the mute button here.
-        int32_t gain = m_player->gain();
-        QString iconText;
-        if (gain < ui->volumeSlider->minimum()) {
-            // muted
-            iconText = "audio-volume-muted";
-        } else if (gain <= -1000) {
-            iconText = "audio-volume-low";
-        } else if (gain <= 0) {
-            iconText = "audio-volume-medium";
-        } else {
-            iconText = "audio-volume-high";
-        }
-        ui->muteButton->setIcon(QIcon::fromTheme(iconText));
-    });
+    connect(m_player, &Player::gainChanged, this, &MainWindow::updateVolumeIcon);
 
     connect(this, &MainWindow::repeatModeChanged, this, [this](RepeatMode mode){
         switch (mode) {
@@ -169,6 +166,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    Settings::instance()->setVolume(ui->volumeSlider->value());
+
     delete ui;
 }
 
@@ -236,6 +235,24 @@ void MainWindow::generateThemeMenu()
     }
 }
 
+void MainWindow::updateVolumeIcon()
+{
+    // only update the icon of the mute button here.
+    int32_t gain = m_player->gain();
+    QString iconText;
+    if (gain < ui->volumeSlider->minimum()) {
+        // muted
+        iconText = "audio-volume-muted";
+    } else if (gain <= -1000) {
+        iconText = "audio-volume-low";
+    } else if (gain <= 0) {
+        iconText = "audio-volume-medium";
+    } else {
+        iconText = "audio-volume-high";
+    }
+    ui->muteButton->setIcon(QIcon::fromTheme(iconText));
+}
+
 void MainWindow::on_instrumentsBtn_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->instrumentsPage);
@@ -262,7 +279,6 @@ void MainWindow::on_playlistView_activated(const QModelIndex &index)
     m_playlistManager->setCurrentIndex(sourceIndex);
     playFile(m_playlistManager->urlByIndex(sourceIndex));
 }
-
 
 void MainWindow::on_actionAbout_triggered()
 {
@@ -295,12 +311,10 @@ void MainWindow::on_actionAbout_triggered()
     infoBox.exec();
 }
 
-
 void MainWindow::on_filterEdit_textChanged(const QString &arg1)
 {
     m_playlistFilterModel->setFilterFixedString(arg1);
 }
-
 
 void MainWindow::on_muteButton_clicked()
 {
@@ -314,7 +328,6 @@ void MainWindow::on_muteButton_clicked()
     m_player->setGain(isMuted ? ui->volumeSlider->value() : std::numeric_limits<std::int32_t>::min());
 }
 
-
 void MainWindow::on_playbackModeButton_clicked()
 {
     RepeatMode targetMode = FirstRepeatMode;
@@ -322,4 +335,10 @@ void MainWindow::on_playbackModeButton_clicked()
         targetMode = static_cast<RepeatMode>(m_repeatMode + 1);
     }
     setProperty("repeatMode", targetMode);
+}
+
+void MainWindow::on_actionAudioSettings_triggered()
+{
+    AudioSettingsDialog dialog(m_player, this);
+    dialog.exec();
 }

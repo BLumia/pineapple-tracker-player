@@ -4,15 +4,12 @@
 #include <QFile>
 #include <QDebug>
 
-#include <fstream>
 #include <memory>
 
 #include <libopenmpt/libopenmpt.hpp>
 #include <libopenmpt/libopenmpt_ext.hpp>
 
 #include <portaudio.h>
-
-constexpr std::int32_t SAMPLE_RATE = 48000;
 
 QDebug& operator<<(QDebug& out, const std::string& str)
 {
@@ -22,16 +19,14 @@ QDebug& operator<<(QDebug& out, const std::string& str)
 
 Player::Player(QObject *parent)
     : QObject{parent}
-    , m_isPlaying(false)
+    , AbstractPlayer()
     , m_restartAfterFinished(false)
 {
-    Pa_Initialize();
     setupAndStartStream();
 }
 
 Player::~Player()
 {
-    Pa_StopStream(m_stream);
 }
 
 bool Player::load(const QUrl &filename)
@@ -67,37 +62,27 @@ bool Player::load(const QUrl &filename)
 void Player::play()
 {
     if (!m_module) return;
-    PaError ret = Pa_IsStreamActive(m_stream);
-    if (ret == 0) {
-        qDebug() << "Playback stream stopped, restarting...";
-        bool succ = setupAndStartStream();
-        if (!succ) {
-            qDebug() << "Not able to restart playback stream";
-            return;
-        }
-    }
-    m_isPlaying = true;
+    AbstractPlayer::play();
     emit playbackStatusChanged();
 }
 
 void Player::pause()
 {
-    m_isPlaying = false;
+    AbstractPlayer::pause();
     emit playbackStatusChanged();
 }
 
-int Player::streamCallback(const void *inputBuffer, void *outputBuffer, unsigned long numFrames)
+void Player::renderAudio(float *buffer, unsigned long numFrames)
 {
-    float* buffer = (float*)outputBuffer;
     if (m_module && m_isPlaying) {
-        std::size_t count = m_module->read_interleaved_stereo(SAMPLE_RATE, numFrames, buffer);
+        std::size_t count = m_module->read_interleaved_stereo(m_audioSettings.sampleRate, numFrames, buffer);
         updateCachedState();
         if (count == 0) {
             // api like get_current_order() will return as it rewinded to the beginning of the song
             // but read() will still return 0 frame and won't write to the buffer...
             seek(0);
             if (!m_restartAfterFinished) {
-                m_isPlaying = false;
+                AbstractPlayer::pause();
                 emit playbackStatusChanged();
                 emit endOfSongReached();
             }
@@ -105,8 +90,21 @@ int Player::streamCallback(const void *inputBuffer, void *outputBuffer, unsigned
     } else {
         std::fill(buffer, buffer + numFrames * 2, 0);
     }
+}
 
-    return 0;
+void Player::onStop()
+{
+    seek(0);
+    emit playbackStatusChanged();
+}
+
+void Player::onSeek(unsigned int ms)
+{
+    if (!m_module)
+        return;
+    m_module->set_position_seconds(ms / 1000.0);
+    emit currentPatternChanged();
+    emit currentRowChanged();
 }
 
 int32_t Player::currentOrder() const
@@ -221,7 +219,7 @@ QVector<QStringList> Player::patternContent(int32_t pattern) const
     for (std::int32_t row = 0; row < m_module->get_pattern_num_rows(pattern); row++) {
         QStringList content;
         for (std::int32_t channel = 0; channel < channelCount; channel++) {
-//            content << QString::fromStdString(m_module->format_pattern_row_channel_command(pattern, row, channel, openmpt::module::command_index::command_note));
+            //            content << QString::fromStdString(m_module->format_pattern_row_channel_command(pattern, row, channel, openmpt::module::command_index::command_note));
             content << QString::fromStdString(m_module->format_pattern_row_channel(pattern, row, channel, 13));
         }
         patternContent << content;
@@ -232,23 +230,7 @@ QVector<QStringList> Player::patternContent(int32_t pattern) const
 
 bool Player::isPlaying() const
 {
-    return m_isPlaying;
-}
-
-bool Player::setupAndStartStream()
-{
-    Pa_OpenDefaultStream(&m_stream, 0, 2, paFloat32, SAMPLE_RATE, paFramesPerBufferUnspecified,
-        +[](const void *inputBuffer, void *outputBuffer,
-            unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo* timeInfo,
-            PaStreamCallbackFlags statusFlags, void *userData) -> int {
-            return ((Player *)userData)->streamCallback(inputBuffer, outputBuffer, framesPerBuffer);
-        }, this);
-    PaError err = Pa_StartStream(m_stream);
-    if (err != paNoError) {
-        // TODO: logging?
-        return false;
-    }
-    return true;
+    return AbstractPlayer::isPlaying();
 }
 
 int32_t Player::repeatCount() const

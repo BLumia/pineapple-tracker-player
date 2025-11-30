@@ -25,6 +25,7 @@ endif()
 
 set(PROJECT_SOURCES
     player.h player.cpp
+    abstractplayer.h abstractplayer.cpp
     util.h util.cpp
     playlistmanager.h playlistmanager.cpp
 )

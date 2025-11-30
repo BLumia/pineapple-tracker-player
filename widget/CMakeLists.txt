@@ -26,6 +26,7 @@ set(PROJECT_SOURCES
     trackerwidget.h trackerwidget.cpp
     settings.h settings.cpp
     fileopeneventhandler.h fileopeneventhandler.cpp
+    audiosettingsdialog.h audiosettingsdialog.cpp audiosettingsdialog.ui
 )
 
 if (WIN32)

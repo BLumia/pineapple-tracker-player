@@ -53,9 +53,11 @@ private slots:
     void on_filterEdit_textChanged(const QString &arg1);
     void on_muteButton_clicked();
     void on_playbackModeButton_clicked();
+    void on_actionAudioSettings_triggered();
 
 private:
     void generateThemeMenu();
+    void updateVolumeIcon();
 
     Ui::MainWindow *ui;
     QMenu *m_themes;

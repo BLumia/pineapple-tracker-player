@@ -311,6 +311,7 @@
     <property name="title">
      <string>&amp;Options</string>
     </property>
+    <addaction name="actionAudioSettings"/>
     <addaction name="actionSetTheme"/>
    </widget>
    <addaction name="menuFile"/>
@@ -342,6 +343,11 @@
   <action name="actionSetTheme">
    <property name="text">
     <string>Set Theme</string>
+   </property>
+  </action>
+  <action name="actionAudioSettings">
+   <property name="text">
+    <string>Audio Settings...</string>
    </property>
   </action>
  </widget>

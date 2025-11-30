@@ -1,15 +1,15 @@
 #pragma once
 
-#include <thread>
+#include "abstractplayer.h"
 
 #include <QObject>
 
 namespace openmpt {
-    class module_ext;
-    namespace ext {
-        class interactive;
-    }
+class module_ext;
+namespace ext {
+class interactive;
 }
+} // namespace openmpt
 
 typedef void PaStream;
 
@@ -26,7 +26,7 @@ struct PlaybackOptions
     std::int32_t gain = 0; // 100 * dB
 };
 
-class Player : public QObject
+class Player : public QObject, public AbstractPlayer
 {
     Q_OBJECT
 public:
@@ -47,9 +47,6 @@ public:
     Q_INVOKABLE void play();
     Q_INVOKABLE void pause();
     bool isPlaying() const;
-
-    bool setupAndStartStream();
-    int streamCallback(const void *inputBuffer, void *outputBuffer, unsigned long numFrames);
 
     std::int32_t currentOrder() const;
     std::int32_t totalOrders() const;
@@ -82,6 +79,11 @@ public:
     std::int32_t gain() const;
     void setGain(std::int32_t dBx100 = 0);
 
+protected:
+    void renderAudio(float *buffer, unsigned long numFrames) override;
+    void onStop() override;
+    void onSeek(unsigned int ms) override;
+
 signals:
     void currentOrderChanged();
     void totalOrdersChanged();
@@ -98,13 +100,10 @@ private:
     void updateCachedState();
 
 private:
-    PaStream * m_stream;
     std::function<void(unsigned int)> mf_playbackCallback;
     openmpt::module_ext * m_module = nullptr;
     openmpt::ext::interactive * m_interactive = nullptr;
     CachedPlaybackState m_cachedState;
     PlaybackOptions m_options;
-    bool m_isPlaying;
     bool m_restartAfterFinished;
 };
-
