@@ -82,6 +82,23 @@ install(TARGETS pineapple-tracker-player
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
+if (WIN32)
+    install(
+        FILES ../dist/passoc/ptrackerplayer.pacfg
+        DESTINATION ${CMAKE_INSTALL_BINDIR}
+        RENAME default-assoc.pacfg
+    )
+
+    install(
+        FILES
+            ../dist/passoc/generic.ico
+            ../dist/passoc/it.ico
+            ../dist/passoc/mod.ico
+            ../dist/passoc/xm.ico
+        DESTINATION "${CMAKE_INSTALL_BINDIR}/icons"
+    )
+endif()
+
 # install icon
 install (
     FILES ../dist/pineapple-tracker-player.svg
