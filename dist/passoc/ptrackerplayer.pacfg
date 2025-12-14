@@ -1,0 +1,24 @@
+targetApp=pineapple-tracker-player.exe
+friendlyAppName=Pineapple Tracker Player
+friendlyAppName[zh_CN]=菠萝模块音乐播放器
+openCommand="\"{targetAppFullPath}\" \"%1\""
+
+[ProgId/xm]
+name=FastTracker 2 eXtended Module
+name[zh_CN]=FastTracker XM 扩展模块音乐
+
+[ProgId/it]
+name=Impulse Tracker Module
+name[zh_CN]=Impulse Tracker 模块音乐
+
+[ProgId/mod]
+name=Module file
+name[zh_CN]=模块音乐文件
+
+[ProgId/s3m]
+name=Scream Tracker 3 Module
+name[zh_CN]=Scream Tracker 3 模块音乐
+
+[ProgId/mptm]
+name=OpenMPT Module
+name[zh_CN]=OpenMPT 模块音乐
