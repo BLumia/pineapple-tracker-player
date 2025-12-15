@@ -2,6 +2,40 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="tr">
 <context>
+    <name>AudioSettingsDialog</name>
+    <message>
+        <location filename="../../widget/audiosettingsdialog.ui" line="+14"/>
+        <source>Audio Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Output Device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Sample Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Buffer Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widget/audiosettingsdialog.cpp" line="+29"/>
+        <location line="+31"/>
+        <source>Auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <location filename="../../widget/mainwindow.ui" line="+17"/>
@@ -20,7 +54,7 @@
     </message>
     <message>
         <location line="+16"/>
-        <location filename="../../widget/mainwindow.cpp" line="+65"/>
+        <location filename="../../widget/mainwindow.cpp" line="+77"/>
         <source>Play</source>
         <translation>Oynat</translation>
     </message>
@@ -31,7 +65,7 @@
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../widget/mainwindow.cpp" line="+53"/>
+        <location filename="../../widget/mainwindow.cpp" line="+40"/>
         <source>Repeat</source>
         <translation>Yinele</translation>
     </message>
@@ -81,13 +115,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+14"/>
         <source>&amp;Open</source>
         <translation type="unfinished">&amp;Aç</translation>
     </message>
     <message>
         <location line="+11"/>
-        <location filename="../../widget/mainwindow.cpp" line="+151"/>
+        <location filename="../../widget/mainwindow.cpp" line="+170"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
@@ -97,12 +131,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widget/mainwindow.cpp" line="-204"/>
+        <location line="+5"/>
+        <source>Audio Settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widget/mainwindow.cpp" line="-210"/>
         <source>Pause</source>
         <translation type="unfinished">Duraklat</translation>
     </message>
     <message>
-        <location line="+48"/>
+        <location line="+35"/>
         <source>Single</source>
         <comment>Repeat is disabled, song will only play a single time and will then stopped.</comment>
         <translation type="unfinished"></translation>
@@ -117,10 +156,10 @@
         <location line="+7"/>
         <source>Playlist</source>
         <comment>Once finished, play the next song in the playlist.</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Oynatma Listesi</translation>
     </message>
     <message>
-        <location line="+148"/>
+        <location line="+167"/>
         <source>Based on the following free software libraries:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -191,7 +230,7 @@
     <message>
         <location line="+0"/>
         <source>Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Yinele</translation>
     </message>
     <message>
         <location line="+31"/>

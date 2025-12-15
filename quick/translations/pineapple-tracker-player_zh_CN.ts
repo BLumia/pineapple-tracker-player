@@ -2,6 +2,40 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
+    <name>AudioSettingsDialog</name>
+    <message>
+        <location filename="../../widget/audiosettingsdialog.ui" line="+14"/>
+        <source>Audio Settings</source>
+        <translation>音频设置</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Output Device</source>
+        <translation>输出设备</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Sample Rate</source>
+        <translation>采样率</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Buffer Size</source>
+        <translation>缓冲区大小</translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <source>Refresh</source>
+        <translation>刷新</translation>
+    </message>
+    <message>
+        <location filename="../../widget/audiosettingsdialog.cpp" line="+29"/>
+        <location line="+31"/>
+        <source>Auto</source>
+        <translation>自动</translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <location filename="../../widget/mainwindow.ui" line="+17"/>
@@ -20,7 +54,7 @@
     </message>
     <message>
         <location line="+16"/>
-        <location filename="../../widget/mainwindow.cpp" line="+65"/>
+        <location filename="../../widget/mainwindow.cpp" line="+77"/>
         <source>Play</source>
         <translation>播放</translation>
     </message>
@@ -31,7 +65,7 @@
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../widget/mainwindow.cpp" line="+53"/>
+        <location filename="../../widget/mainwindow.cpp" line="+40"/>
         <source>Repeat</source>
         <translation>循环</translation>
     </message>
@@ -81,13 +115,13 @@
         <translation>选项(&amp;O)</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+14"/>
         <source>&amp;Open</source>
         <translation>打开(&amp;O)</translation>
     </message>
     <message>
         <location line="+11"/>
-        <location filename="../../widget/mainwindow.cpp" line="+151"/>
+        <location filename="../../widget/mainwindow.cpp" line="+170"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
@@ -97,12 +131,17 @@
         <translation>设置主题</translation>
     </message>
     <message>
-        <location filename="../../widget/mainwindow.cpp" line="-204"/>
+        <location line="+5"/>
+        <source>Audio Settings...</source>
+        <translation>音频设置...</translation>
+    </message>
+    <message>
+        <location filename="../../widget/mainwindow.cpp" line="-210"/>
         <source>Pause</source>
         <translation>暂停</translation>
     </message>
     <message>
-        <location line="+48"/>
+        <location line="+35"/>
         <source>Single</source>
         <comment>Repeat is disabled, song will only play a single time and will then stopped.</comment>
         <translation>单次</translation>
@@ -120,7 +159,7 @@
         <translation>列表</translation>
     </message>
     <message>
-        <location line="+148"/>
+        <location line="+167"/>
         <source>Based on the following free software libraries:</source>
         <translation>基于下列自由软件库：</translation>
     </message>
