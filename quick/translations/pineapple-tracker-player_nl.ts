@@ -6,33 +6,33 @@
     <message>
         <location filename="../../widget/audiosettingsdialog.ui" line="+14"/>
         <source>Audio Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio-instellingen</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Output Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitvoerapparaat</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Sample Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Samplesnelheid</translation>
     </message>
     <message>
         <location line="+17"/>
         <source>Buffer Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Bufferomvang</translation>
     </message>
     <message>
         <location line="+34"/>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Herladen</translation>
     </message>
     <message>
         <location filename="../../widget/audiosettingsdialog.cpp" line="+29"/>
         <location line="+31"/>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch</translation>
     </message>
 </context>
 <context>
@@ -133,7 +133,7 @@
     <message>
         <location line="+5"/>
         <source>Audio Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio-instellingen…</translation>
     </message>
     <message>
         <location filename="../../widget/mainwindow.cpp" line="-210"/>
