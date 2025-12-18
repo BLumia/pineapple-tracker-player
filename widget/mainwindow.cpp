@@ -9,6 +9,7 @@
 
 #include "instrumentsmodel.h"
 
+#include <QDesktopServices>
 #include <QFileDialog>
 #include <QMimeData>
 #include <QMouseEvent>
@@ -291,7 +292,7 @@ void MainWindow::on_actionAbout_triggered()
 #endif // Q_OS_MACOS
     std::uint32_t libopenmptver = openmpt::get_library_version();
     infoBox.setText(
-        "Pineapple Tracker Player " PTPLAY_VERSION_STRING
+        QString("%1 %2").arg(tr("Pineapple Tracker Player")).arg(PTPLAY_VERSION_STRING) %
         "\n\n" %
         tr("Based on the following free software libraries:") %
         "\n\n" %
@@ -342,3 +343,14 @@ void MainWindow::on_actionAudioSettings_triggered()
     AudioSettingsDialog dialog(m_player, this);
     dialog.exec();
 }
+
+void MainWindow::on_actionDonate_triggered()
+{
+    QDesktopServices::openUrl(QUrl("https://link.blumia.net/pineapple-apps-donate"));
+}
+
+void MainWindow::on_actionExit_triggered()
+{
+    qApp->exit();
+}
+

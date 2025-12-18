@@ -54,6 +54,8 @@ private slots:
     void on_muteButton_clicked();
     void on_playbackModeButton_clicked();
     void on_actionAudioSettings_triggered();
+    void on_actionDonate_triggered();
+    void on_actionExit_triggered();
 
 private:
     void generateThemeMenu();

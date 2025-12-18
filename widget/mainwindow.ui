@@ -292,7 +292,7 @@
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>24</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -300,11 +300,13 @@
      <string>&amp;File</string>
     </property>
     <addaction name="actionOpen"/>
+    <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menu_Help">
     <property name="title">
      <string>&amp;Help</string>
     </property>
+    <addaction name="actionDonate"/>
     <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menu_Options">
@@ -348,6 +350,19 @@
   <action name="actionAudioSettings">
    <property name="text">
     <string>Audio Settings...</string>
+   </property>
+  </action>
+  <action name="actionDonate">
+   <property name="text">
+    <string>Donate</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset theme="application-exit"/>
+   </property>
+   <property name="text">
+    <string>E&amp;xit</string>
    </property>
   </action>
  </widget>
