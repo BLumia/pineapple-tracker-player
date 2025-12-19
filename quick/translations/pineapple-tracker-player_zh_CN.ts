@@ -54,7 +54,7 @@
     </message>
     <message>
         <location line="+16"/>
-        <location filename="../../widget/mainwindow.cpp" line="+77"/>
+        <location filename="../../widget/mainwindow.cpp" line="+78"/>
         <source>Play</source>
         <translation>播放</translation>
     </message>
@@ -105,12 +105,12 @@
         <translation>文件(&amp;F)</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>&amp;Help</source>
         <translation>帮助(&amp;H)</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>&amp;Options</source>
         <translation>选项(&amp;O)</translation>
     </message>
@@ -134,6 +134,16 @@
         <location line="+5"/>
         <source>Audio Settings...</source>
         <translation>音频设置...</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Donate</source>
+        <translation>捐款</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>E&amp;xit</source>
+        <translation>退出(&amp;E)</translation>
     </message>
     <message>
         <location filename="../../widget/mainwindow.cpp" line="-210"/>

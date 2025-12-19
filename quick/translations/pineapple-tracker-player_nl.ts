@@ -54,7 +54,7 @@
     </message>
     <message>
         <location line="+16"/>
-        <location filename="../../widget/mainwindow.cpp" line="+77"/>
+        <location filename="../../widget/mainwindow.cpp" line="+78"/>
         <source>Play</source>
         <translation>Afspelen</translation>
     </message>
@@ -105,12 +105,12 @@
         <translation>&amp;Bestand</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>&amp;Help</source>
         <translation>&amp;Hulp</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>&amp;Options</source>
         <translation>&amp;Opties</translation>
     </message>
@@ -134,6 +134,16 @@
         <location line="+5"/>
         <source>Audio Settings...</source>
         <translation>Audio-instellingen…</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Donate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>E&amp;xit</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../widget/mainwindow.cpp" line="-210"/>
