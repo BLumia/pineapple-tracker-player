@@ -138,12 +138,12 @@
     <message>
         <location line="+5"/>
         <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>Doneren</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>E&amp;xit</source>
-        <translation type="unfinished"></translation>
+        <translation>Af&amp;sluiten</translation>
     </message>
     <message>
         <location filename="../../widget/mainwindow.cpp" line="-210"/>
