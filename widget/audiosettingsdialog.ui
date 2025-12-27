@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>334</width>
-    <height>136</height>
+    <width>397</width>
+    <height>144</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,7 +34,7 @@
       <widget class="QComboBox" name="sampleRateCombo">
        <property name="minimumSize">
         <size>
-         <width>200</width>
+         <width>0</width>
          <height>0</height>
         </size>
        </property>
@@ -55,14 +55,14 @@
        <item>
         <widget class="QComboBox" name="deviceCombo">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
          <property name="minimumSize">
           <size>
-           <width>0</width>
+           <width>200</width>
            <height>0</height>
           </size>
          </property>
