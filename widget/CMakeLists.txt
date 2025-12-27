@@ -41,6 +41,7 @@ qt_add_executable(pineapple-tracker-player
 qt_add_translations(pineapple-tracker-player
 TS_FILES
     ../quick/translations/pineapple-tracker-player.ts
+    ../quick/translations/pineapple-tracker-player_de.ts
     ../quick/translations/pineapple-tracker-player_nl.ts
     ../quick/translations/pineapple-tracker-player_pl.ts
     ../quick/translations/pineapple-tracker-player_tr.ts

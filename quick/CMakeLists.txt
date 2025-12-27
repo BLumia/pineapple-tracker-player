@@ -52,6 +52,7 @@ QML_FILES
 qt_add_translations(pineapple-tracker-player-quick
 TS_FILES
     translations/pineapple-tracker-player.ts
+    translations/pineapple-tracker-player_de.ts
     translations/pineapple-tracker-player_nl.ts
     translations/pineapple-tracker-player_pl.ts
     translations/pineapple-tracker-player_tr.ts
