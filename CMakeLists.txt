@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22)
 
-project(pineapple-tracker-player VERSION 0.6.0 LANGUAGES CXX)
+project(pineapple-tracker-player VERSION 0.6.1 LANGUAGES CXX)
 
 # https://forum.qt.io/topic/155823/cmake-does-not-work-with-qt-6-7-0
 # https://bugreports.qt.io/browse/QTBUG-126167

@@ -24,6 +24,8 @@
 
   <url type="homepage">https://github.com/BLumia/pineapple-tracker-player</url>
   <url type="bugtracker">https://github.com/BLumia/pineapple-tracker-player/issues</url>
+  <url type="donation">https://link.blumia.net/pineapple-apps-donate</url>
+  <url type="translate">https://translate.codeberg.org/projects/pineapple-apps/pineapple-tracker-player/</url>
   <provides>
     <binary>pineapple-tracker-player</binary>
   </provides>

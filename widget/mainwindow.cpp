@@ -306,7 +306,7 @@ void MainWindow::on_actionAbout_triggered()
         "\n"
         "[Source Code](https://github.com/BLumia/pineapple-tracker-player)\n"
         "\n"
-        "Copyright &copy; 2025 [BLumia](https://github.com/BLumia/)"
+        "Copyright &copy; 2026 [BLumia](https://github.com/BLumia/)"
         );
     infoBox.setTextFormat(Qt::MarkdownText);
     infoBox.exec();
