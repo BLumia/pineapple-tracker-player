@@ -4,6 +4,8 @@
 
 #include "settings.h"
 
+#include <portaudio.h>
+
 #include <QApplication>
 #include <QStandardPaths>
 #include <QDebug>
@@ -66,7 +68,7 @@ void Settings::setAudioSampleRate(int sampleRate)
 
 int Settings::audioFramesPerBuffer() const
 {
-    return m_qsettings->value("audio_frames_per_buffer", 0).toInt();
+    return m_qsettings->value("audio_frames_per_buffer", paFramesPerBufferUnspecified).toInt();
 }
 
 void Settings::setAudioFramesPerBuffer(int framesPerBuffer)

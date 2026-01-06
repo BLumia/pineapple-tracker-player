@@ -239,14 +239,11 @@ AbstractPlayer::StreamState AbstractPlayer::setupAndStartStream()
             outParams.device, devInfo->name ? devInfo->name : "?",
             Pa_GetHostApiInfo(devInfo->hostApi) ? Pa_GetHostApiInfo(devInfo->hostApi)->name : "?",
             outParams.channelCount, sr,
-            (m_audioSettings.framesPerBuffer == 0) ? paFramesPerBufferUnspecified
-                                                   : m_audioSettings.framesPerBuffer);
+            m_audioSettings.framesPerBuffer);
 
     err = Pa_OpenStream(
             &m_stream, nullptr, &outParams, sr,
-            (m_audioSettings.framesPerBuffer == 0) ? paFramesPerBufferUnspecified
-                                                   : m_audioSettings.framesPerBuffer,
-            paNoFlag,
+            m_audioSettings.framesPerBuffer, paNoFlag,
             +[](const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer,
                 const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags,
                 void *userData) -> int {
