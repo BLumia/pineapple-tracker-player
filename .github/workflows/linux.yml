@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           submodules: recursive
       - name: Install build dept.
@@ -41,7 +41,7 @@ jobs:
           ./linuxdeploy-x86_64.AppImage --appdir AppDir -e build/widget/pineapple-tracker-player -d dist/net.blumia.pineapple-tracker-player.desktop -i dist/pineapple-tracker-player.svg --icon-filename net.blumia.pineapple-tracker-player -p qt -o appimage
           rm ./linuxdeploy*x86_64.AppImage
       - name: Upload
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: Linux-Build
           path: "*.AppImage"

@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           submodules: recursive
 
@@ -77,7 +77,7 @@ jobs:
           hdiutil create -fs HFS+ -srcfolder dmg_root -volname "Pineapple Tracker Player" "Pineapple-Tracker-Player-${{ matrix.arch }}.dmg"
 
       - name: Upload DMG Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: Pineapple-Tracker-Player-macOS-${{ matrix.arch }}
           path: Pineapple-Tracker-Player-${{ matrix.arch }}.dmg
