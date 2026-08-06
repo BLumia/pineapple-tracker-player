@@ -1,0 +1,83 @@
+name: macOS Build and Package
+
+on:
+  push:
+    branches: [ "*" ]
+  pull_request:
+    branches: [ "*" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build (${{ matrix.os }} - ${{ matrix.arch }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-15
+            arch: arm64
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - name: Set up Homebrew Dependencies
+        run: |
+          # Install dependencies via Homebrew
+          brew install qt libopenmpt portaudio pkg-config dylibbundler extra-cmake-modules
+
+      - name: Configure CMake and Build
+        run: |
+          # Locate Qt, libopenmpt, and portaudio homebrew prefixes
+          QT_PREFIX=$(brew --prefix qt)
+          OPENMPT_PREFIX=$(brew --prefix libopenmpt)
+          PORTAUDIO_PREFIX=$(brew --prefix portaudio)
+
+          # Set up PKG_CONFIG_PATH so FindPortAudio and libopenmpt are resolved
+          export PKG_CONFIG_PATH="$QT_PREFIX/lib/pkgconfig:$OPENMPT_PREFIX/lib/pkgconfig:$PORTAUDIO_PREFIX/lib/pkgconfig:$PKG_CONFIG_PATH"
+          echo "PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
+
+          # Configure CMake with prefix path
+          cmake -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_PREFIX_PATH="$QT_PREFIX" \
+            .
+
+          # Build target
+          cmake --build build -j$(sysctl -n hw.ncpu)
+
+      - name: Install Application to Temporary Directory
+        run: |
+          cmake --install build --prefix install
+
+      - name: Run macdeployqt on Bundle
+        run: |
+          QT_PREFIX=$(brew --prefix qt)
+          "$QT_PREFIX/bin/macdeployqt" install/pineapple-tracker-player.app
+
+      - name: Run dylibbundler on Bundle
+        run: |
+          # Use dylibbundler to bundle third party libraries like portaudio and libopenmpt
+          # and resolve their internal paths
+          dylibbundler -od -b \
+            -x install/pineapple-tracker-player.app/Contents/MacOS/pineapple-tracker-player \
+            -d install/pineapple-tracker-player.app/Contents/libs/
+
+      - name: Package into DMG
+        run: |
+          # Create DMG root directory and prepare layout
+          mkdir dmg_root
+          cp -R install/pineapple-tracker-player.app dmg_root/
+          ln -s /Applications dmg_root/Applications
+
+          # Package using hdiutil
+          hdiutil create -fs HFS+ -srcfolder dmg_root -volname "Pineapple Tracker Player" "Pineapple-Tracker-Player-${{ matrix.arch }}.dmg"
+
+      - name: Upload DMG Artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: Pineapple-Tracker-Player-macOS-${{ matrix.arch }}
+          path: Pineapple-Tracker-Player-${{ matrix.arch }}.dmg
