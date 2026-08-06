@@ -36,7 +36,7 @@ qt_add_library(player-shared OBJECT
 )
 
 target_include_directories(player-shared PUBLIC ${CMAKE_CURRENT_LIST_DIR})
-target_link_libraries(player-shared PRIVATE Qt::Gui PkgConfig::OpenMPT PortAudio::PortAudio)
+target_link_libraries(player-shared PUBLIC Qt::Gui PkgConfig::OpenMPT PortAudio::PortAudio)
 
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(player-shared)
